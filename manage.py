@@ -3,9 +3,19 @@
 import os
 import sys
 
+from glob import glob
+from dotenv import load_dotenv
+
+env_files = [
+    '.env',
+    '.pg.env',
+]
 
 def main():
     """Run administrative tasks."""
+    for env_file in env_files:
+        load_dotenv(env_file)
+
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'macc.settings')
     try:
         from django.core.management import execute_from_command_line
