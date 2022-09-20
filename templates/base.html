@@ -7,9 +7,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  {% block css %}{% endblock css %}
   <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
-  <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+  <link rel="stylesheet" href="{% static 'css/mdb.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/font.css' %}">
+  {% block css %}{% endblock css %}
 
   <title>MACC | {% block title %}{% endblock title %}</title>
 </head>
@@ -19,6 +21,10 @@
     {% block content %}{% endblock content %}
   </div>
 
+
+  <script src="{% static 'js/jquery.min.js' %}"></script>
+  <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'js/mdb.min.js' %}"></script>
   {% block js %}{% endblock js %}
 </body>
 </html>

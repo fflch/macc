@@ -1,3 +1,23 @@
-<nav class="navbar navbar-light bg-light">
-  <a class="navbar-brand" href="#">Navbar</a>
+{% load i18n %}
+{% load pages_extras %}
+
+{% get_current_language as CURRENT_LANGUAGE %}
+{% get_available_languages as AVAILABLE_LANGUAGES %}
+{% get_language_info_list for AVAILABLE_LANGUAGES as LANGUAGES %}
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="/">MACC</a>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="form-inline ml-auto">
+      <div class="btn-group" role="group" aria-label="{% trans "Idioma" %}">
+          <a class="btn bg-transparent" href="/pt-br/"><i class="flag flag-br"></i></a>
+          <a class="btn bg-transparent" href="/en-us/"><i class="flag flag-us"></i></a>
+      </div>
+    </div>
+  </div>
 </nav>
