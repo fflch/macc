@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-19 19:57-0300\n"
+"POT-Creation-Date: 2022-09-21 20:45+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,18 +17,55 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-#: macc/settings.py:124
+
+#: macc/settings.py:125
 msgid "Português (Brasil)"
 msgstr ""
 
-#: macc/settings.py:125
+#: macc/settings.py:126
 msgid "Inglês (EUA)"
 msgstr ""
 
-#: templates/navbar.html:18
+#: templates/navbar.html:16
 msgid "Idioma"
 msgstr ""
 
-#: templates/pages/home.html:11
+#: templates/pages/home.html:7
 msgid "Bem-vindo ao MACC!"
+msgstr ""
+
+#: work/apps.py:8
+#, fuzzy
+#| msgid "works"
+msgid "work"
+msgstr "obra"
+
+#: work/apps.py:9
+#, fuzzy
+#| msgid "works"
+msgid "works"
+msgstr "obras"
+
+#: work/models.py:10
+msgid "nome"
+msgstr ""
+
+#: work/models.py:11
+msgid "sobrenome"
+msgstr ""
+
+#: work/models.py:18
+msgid "autor"
+msgstr ""
+
+#: work/models.py:19
+msgid "autores"
+msgstr ""
+
+#: work/models.py:23
+msgid "tradutor"
+msgstr ""
+
+#: work/models.py:24
+msgid "tradutores"
 msgstr ""
