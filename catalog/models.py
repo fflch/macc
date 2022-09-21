@@ -22,3 +22,15 @@ class Translator(BaseAuthor):
     class Meta:
         verbose_name = gettext_lazy('tradutor')
         verbose_name_plural = gettext_lazy('tradutores')
+
+class Work(TimeStampedModel):
+    class Meta:
+        verbose_name = gettext_lazy('obra')
+        verbose_name_plural = gettext_lazy('obras')
+
+    title = models.CharField(max_length=255, verbose_name=gettext_lazy('título'))
+    code = models.CharField(max_length=20, verbose_name=gettext_lazy('código'), unique=True)
+    authors = models.ManyToManyField(Author, verbose_name=gettext_lazy('autores'))
+
+    def __str__(self) -> str:
+        return self.title

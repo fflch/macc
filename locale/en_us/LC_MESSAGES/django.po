@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-21 20:45+0000\n"
+"POT-Creation-Date: 2022-09-21 21:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,54 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: catalog/apps.py:8
+msgid "catalog"
+msgstr ""
+
+#: catalog/apps.py:9
+msgid "catalogs"
+msgstr ""
+
+#: catalog/models.py:10
+msgid "nome"
+msgstr "first name"
+
+#: catalog/models.py:11
+msgid "sobrenome"
+msgstr "last name"
+
+#: catalog/models.py:18
+msgid "autor"
+msgstr "author"
+
+#: catalog/models.py:19 catalog/models.py:33
+msgid "autores"
+msgstr "authors"
+
+#: catalog/models.py:23
+msgid "tradutor"
+msgstr "translator"
+
+#: catalog/models.py:24
+msgid "tradutores"
+msgstr "translators"
+
+#: catalog/models.py:28
+msgid "obra"
+msgstr "work"
+
+#: catalog/models.py:29
+msgid "obras"
+msgstr "works"
+
+#: catalog/models.py:31
+msgid "título"
+msgstr "title"
+
+#: catalog/models.py:32
+msgid "código"
+msgstr "code"
 
 #: macc/settings.py:125
 msgid "Português (Brasil)"
@@ -29,38 +77,6 @@ msgstr "English (USA)"
 msgid "Idioma"
 msgstr "Language"
 
-#: templates/pages/home.html:7
+#: templates/page/home.html:7
 msgid "Bem-vindo ao MACC!"
 msgstr "Welcome to MACC!"
-
-#: work/apps.py:8
-msgid "work"
-msgstr ""
-
-#: work/apps.py:9
-msgid "works"
-msgstr ""
-
-#: work/models.py:10
-msgid "nome"
-msgstr "first name"
-
-#: work/models.py:11
-msgid "sobrenome"
-msgstr "last name"
-
-#: work/models.py:18
-msgid "autor"
-msgstr "author"
-
-#: work/models.py:19
-msgid "autores"
-msgstr "authors"
-
-#: work/models.py:23
-msgid "tradutor"
-msgstr "translator"
-
-#: work/models.py:24
-msgid "tradutores"
-msgstr "translators"
