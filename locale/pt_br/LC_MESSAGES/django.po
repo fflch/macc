@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-21 21:37+0000\n"
+"POT-Creation-Date: 2022-09-26 22:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,51 +18,43 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: catalog/apps.py:8
-msgid "catalog"
-msgstr "catálogo"
-
-#: catalog/apps.py:9
-msgid "catalogs"
-msgstr "catálogos"
-
-#: catalog/models.py:10
+#: corpus/models.py:10
 msgid "nome"
 msgstr ""
 
-#: catalog/models.py:11
+#: corpus/models.py:11
 msgid "sobrenome"
 msgstr ""
 
-#: catalog/models.py:18
+#: corpus/models.py:18
 msgid "autor"
 msgstr ""
 
-#: catalog/models.py:19 catalog/models.py:33
+#: corpus/models.py:19 corpus/models.py:33
 msgid "autores"
 msgstr ""
 
-#: catalog/models.py:23
+#: corpus/models.py:23
 msgid "tradutor"
 msgstr ""
 
-#: catalog/models.py:24
+#: corpus/models.py:24
 msgid "tradutores"
 msgstr ""
 
-#: catalog/models.py:28
+#: corpus/models.py:28
 msgid "obra"
 msgstr ""
 
-#: catalog/models.py:29
+#: corpus/models.py:29
 msgid "obras"
 msgstr ""
 
-#: catalog/models.py:31
+#: corpus/models.py:31
 msgid "título"
 msgstr ""
 
-#: catalog/models.py:32
+#: corpus/models.py:32
 msgid "código"
 msgstr ""
 
@@ -74,13 +66,23 @@ msgstr ""
 msgid "Inglês (EUA)"
 msgstr ""
 
-#: templates/navbar.html:16
+#: templates/base.html:17 templates/page/home.html:8
+msgid "Machado de Assis Corpus e Catálogo"
+msgstr ""
+
+#: templates/navbar.html:12
 msgid "Idioma"
 msgstr ""
 
 #: templates/page/home.html:7
 msgid "Bem-vindo ao MACC!"
 msgstr ""
+
+#~ msgid "catalog"
+#~ msgstr "catálogo"
+
+#~ msgid "catalogs"
+#~ msgstr "catálogos"
 
 #~ msgid "work"
 #~ msgstr "obra"
