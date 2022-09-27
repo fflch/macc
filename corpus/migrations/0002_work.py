@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
                 ('updated_at', models.DateTimeField(auto_now=True)),
                 ('title', models.CharField(max_length=255, verbose_name='título')),
                 ('code', models.CharField(max_length=20, unique=True, verbose_name='código')),
-                ('authors', models.ManyToManyField(to='work.author', verbose_name='autores')),
+                ('authors', models.ManyToManyField(to='corpus.author', verbose_name='autores')),
             ],
             options={
                 'verbose_name': 'obra',
