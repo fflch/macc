@@ -10,6 +10,7 @@ python-dotenv = "*"
 
 [dev-packages]
 ipython = "*"
+autopep8 = "*"
 
 [requires]
 python_version = "3.10"
