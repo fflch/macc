@@ -23,6 +23,7 @@ urlpatterns = i18n_patterns(
     path('admin/', admin.site.urls),
     path('', include('page.urls')),
     path('corpus/', include('corpus.urls', namespace='corpus')),
+    path('__debug__/', include('debug_toolbar.urls')),
 )
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
