@@ -63,7 +63,7 @@ class Place(TimeStampedModel):
         max_length=255, verbose_name=gettext_lazy('país'))
 
     def __str__(self) -> str:
-        return self.name
+        return ", ".join(filter(lambda v: v is not None, [self.city, self.state_province, self.country]))
 
 
 class Publisher(TimeStampedModel):
@@ -73,7 +73,7 @@ class Publisher(TimeStampedModel):
 
     name = models.CharField(max_length=255, verbose_name=gettext_lazy('nome'))
     place = models.ForeignKey(
-        Place, null=True, blank=True, on_delete=models.RESTRICT, related_name=gettext_lazy('local'))
+        Place, null=True, blank=True, on_delete=models.RESTRICT)
 
     def __str__(self) -> str:
         return self.name
@@ -93,6 +93,9 @@ class Collection(TimeStampedModel):
         Translator, blank=True, verbose_name=gettext_lazy('autores'))
     publisher = models.ForeignKey(
         Publisher, null=True, blank=True, on_delete=models.RESTRICT, verbose_name=gettext_lazy('editora'))
+
+    def __str__(self) -> str:
+        return self.title
 
 
 class Translation(TimeStampedModel):
