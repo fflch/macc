@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-26 22:52+0000\n"
+"POT-Creation-Date: 2022-09-28 06:25+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,45 +18,126 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: corpus/models.py:10
-msgid "nome"
-msgstr ""
-
-#: corpus/models.py:11
-msgid "sobrenome"
-msgstr ""
-
-#: corpus/models.py:18
+#: corpus/models.py:23
 msgid "autor"
 msgstr ""
 
-#: corpus/models.py:19 corpus/models.py:33
+#: corpus/models.py:24 corpus/models.py:84 corpus/models.py:130
+#: corpus/models.py:152
 msgid "autores"
 msgstr ""
 
-#: corpus/models.py:23
+#: corpus/models.py:27 corpus/models.py:43 corpus/models.py:111
+msgid "nome"
+msgstr ""
+
+#: corpus/models.py:29 corpus/models.py:45
+msgid "sobrenome"
+msgstr ""
+
+#: corpus/models.py:39
 msgid "tradutor"
 msgstr ""
 
-#: corpus/models.py:24
+#: corpus/models.py:40
 msgid "tradutores"
 msgstr ""
 
-#: corpus/models.py:28
+#: corpus/models.py:74 corpus/models.py:169
 msgid "obra"
 msgstr ""
 
-#: corpus/models.py:29
+#: corpus/models.py:75
 msgid "obras"
 msgstr ""
 
-#: corpus/models.py:31
+#: corpus/models.py:78 corpus/models.py:124 corpus/models.py:144
+msgid "ano"
+msgstr ""
+
+#: corpus/models.py:80 corpus/models.py:126 corpus/models.py:146
 msgid "título"
 msgstr ""
 
-#: corpus/models.py:32
+#: corpus/models.py:82 corpus/models.py:128 corpus/models.py:148
 msgid "código"
 msgstr ""
+
+#: corpus/models.py:92
+msgid "local"
+msgstr ""
+
+#: corpus/models.py:93
+msgid "locais"
+msgstr ""
+
+#: corpus/models.py:96
+msgid "cidade"
+msgstr ""
+
+#: corpus/models.py:98
+msgid "estado/província"
+msgstr ""
+
+#: corpus/models.py:100
+msgid "país"
+msgstr ""
+
+#: corpus/models.py:108 corpus/models.py:132 corpus/models.py:156
+msgid "editora"
+msgstr ""
+
+#: corpus/models.py:109
+msgid "editoras"
+msgstr ""
+
+#: corpus/models.py:121 corpus/models.py:154
+msgid "coletânea"
+msgstr ""
+
+#: corpus/models.py:122
+msgid "coletâneas"
+msgstr ""
+
+#: corpus/models.py:140 corpus/models.py:180
+msgid "tradução"
+msgstr ""
+
+#: corpus/models.py:141
+msgid "traduções"
+msgstr ""
+
+#: corpus/models.py:150 corpus/models.py:183
+msgid "original"
+msgstr ""
+
+#: corpus/models.py:164
+msgid "fragmento original"
+msgstr ""
+
+#: corpus/models.py:165
+msgid "fragmentos originais"
+msgstr ""
+
+#: corpus/models.py:170 corpus/models.py:181
+msgid "fragmento"
+msgstr ""
+
+#: corpus/models.py:175
+msgid "fragmento traduzido"
+msgstr ""
+
+#: corpus/models.py:176
+msgid "fragmentos traduzidos"
+msgstr ""
+
+#: corpus/urls.py:9
+msgid "works/"
+msgstr "obras/"
+
+#: corpus/urls.py:10
+msgid "works/<int:pk>"
+msgstr "obras/<int:pk>"
 
 #: macc/settings.py:125
 msgid "Português (Brasil)"
@@ -66,11 +147,54 @@ msgstr ""
 msgid "Inglês (EUA)"
 msgstr ""
 
+#: macc/urls.py:26
+msgid "corpus/"
+msgstr ""
+
 #: templates/base.html:17 templates/page/home.html:8
 msgid "Machado de Assis Corpus e Catálogo"
 msgstr ""
 
-#: templates/navbar.html:12
+#: templates/corpus/index.html:7
+msgid "Catálogo"
+msgstr ""
+
+#: templates/corpus/index.html:8
+msgid "Romances"
+msgstr ""
+
+#: templates/corpus/index.html:14 templates/corpus/index.html:40
+#: templates/corpus/show.html:16
+msgid "Código"
+msgstr ""
+
+#: templates/corpus/index.html:15 templates/corpus/index.html:41
+#: templates/corpus/show.html:17
+msgid "Título"
+msgstr ""
+
+#: templates/corpus/index.html:16 templates/corpus/index.html:42
+#: templates/corpus/show.html:18
+msgid "Ano"
+msgstr ""
+
+#: templates/corpus/index.html:17 templates/corpus/index.html:43
+msgid "Traduções"
+msgstr ""
+
+#: templates/corpus/index.html:34
+msgid "Contos"
+msgstr ""
+
+#: templates/corpus/show.html:10
+msgid "Não há traduções para a obra selecionada."
+msgstr ""
+
+#: templates/corpus/show.html:19
+msgid "Tradutores"
+msgstr ""
+
+#: templates/navbar.html:18
 msgid "Idioma"
 msgstr ""
 
@@ -86,6 +210,3 @@ msgstr ""
 
 #~ msgid "work"
 #~ msgstr "obra"
-
-#~ msgid "works"
-#~ msgstr "obras"

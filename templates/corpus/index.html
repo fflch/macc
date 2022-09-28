@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/datatables.min.css' %}">
+{% endblock css %}
+
+{% block content %}
+
+<h1>{% translate "Catálogo" %}</h1>
+
+<h2>{% translate "Romances" %}</h2>
+
+<div class="table-responsive">
+  <table class="table table-hover" id="novels-table">
+    <thead>
+      <tr>
+        <th scope="col">{% translate "Código" %}</th>
+        <th scope="col">{% translate "Título" %}</th>
+        <th scope="col">{% translate "Ano" %}</th>
+        <th scope="col">{% translate "Traduções" %}</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for novel in novels %}
+    <tr>
+      <th scope="row"><a href="{% url 'corpus:show' pk=novel.id %}">{{ novel.code }}</a></th>
+      <th scope="row">{{ novel.title }}</th>
+      <td>{{ novel.year }}</td>
+      <td>{{ novel.translation_set.all|length }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+
+<h2>{% translate "Contos" %}</h2>
+
+<div class="table-responsive">
+  <table class="table table-hover" id="shot-stories-table">
+    <thead>
+      <tr>
+        <th scope="col">{% translate "Código" %}</th>
+        <th scope="col">{% translate "Título" %}</th>
+        <th scope="col">{% translate "Ano" %}</th>
+        <th scope="col">{% translate "Traduções" %}</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for short_story in short_stories %}
+    <tr>
+      <th scope="row"><a href="{% url 'corpus:show' pk=short_story.id %}">{{ short_story.code }}</a></th>
+      <th scope="row">{{ short_story.title }}</th>
+      <td>{{ short_story.year }}</td>
+      <td>{{ short_story.translation_set.all|length }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock content %}
+
+{% block js %}
+<script src="{% static 'js/datatables.min.js' %}"></script>
+<script>
+  $(document).ready(function () {
+    $('#novels-table').DataTable();
+    $('#shot-stories-table').DataTable();
+    $('.dataTables_length').addClass('bs-select');
+  });
+</script>
+{% endblock js %}

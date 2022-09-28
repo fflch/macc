@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+
+{% block content %}
+
+<h1>{{ work.title }} ({{ work.year }})</h1>
+
+{% if work.translation_sel.all|length_is:"0" %}
+<p>{% translate "Não há traduções para a obra selecionada." %}</p>
+{% else %}
+<div class="table-responsive">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">{% translate "Código" %}</th>
+        <th scope="col">{% translate "Título" %}</th>
+        <th scope="col">{% translate "Ano" %}</th>
+        <th scope="col">{% translate "Tradutores" %}</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for translation in work.translation_set.all %}
+    <tr>
+      <th>{{ translation.code }}</th>
+      <th>{{ translation.title }}</th>
+      <td>{{ translation.year }}</td>
+      <td>
+        <ul class="list-group list-group-flush">
+          {% for author in translation.authors.all %}
+          <li class="list-group-item">{{ author.full_name }}</li>
+          {% endfor %}
+          {% for author in translation.collection.authors.all %}
+          <li class="list-group-item">{{ author.full_name }}</li>
+          {% endfor %}
+        </ul>
+      </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endif %}
+
+
+{% endblock content %}

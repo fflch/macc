@@ -21,7 +21,8 @@ from django.conf.urls.i18n import i18n_patterns
 
 urlpatterns = i18n_patterns(
     path('admin/', admin.site.urls),
-    path('', include('page.urls'))
+    path('', include('page.urls')),
+    path('corpus/', include('corpus.urls', namespace='corpus')),
 )
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
