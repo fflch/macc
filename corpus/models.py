@@ -1,10 +1,24 @@
+from django.db.models import F, Value
+from django.db.models.functions import Concat
 from django.db import models
 from macc.models import TimeStampedModel
 
 from django.utils.translation import gettext_lazy
 
 
+class PersonManager(models.Manager):
+    def get_queryset(self):
+        annotate = {
+            'full_name': Concat(F('first_name'), Value(' '), F('last_name'),
+                                output_field=models.CharField())
+        }
+        qs = super().get_queryset().annotate(**annotate)
+        return qs
+
+
 class Author(TimeStampedModel):
+    objects = PersonManager()
+
     class Meta:
         verbose_name = gettext_lazy('autor')
         verbose_name_plural = gettext_lazy('autores')
@@ -19,6 +33,8 @@ class Author(TimeStampedModel):
 
 
 class Translator(TimeStampedModel):
+    objects = PersonManager()
+
     class Meta:
         verbose_name = gettext_lazy('tradutor')
         verbose_name_plural = gettext_lazy('tradutores')
@@ -32,7 +48,28 @@ class Translator(TimeStampedModel):
         return f'{self.first_name} {self.last_name}'
 
 
+class WorkQuerySet(models.QuerySet):
+    def novels(self):
+        return self.filter(code__startswith='RO')
+
+    def short_stories(self):
+        return self.filter(code__startswith='CO')
+
+
+class WorkManager(models.Manager):
+    def get_queryset(self):
+        return WorkQuerySet(self.model, using=self._db)
+
+    def novels(self):
+        return self.get_queryset().novels()
+
+    def short_stories(self):
+        return self.get_queryset().short_stories()
+
+
 class Work(TimeStampedModel):
+    objects = WorkManager()
+
     class Meta:
         verbose_name = gettext_lazy('obra')
         verbose_name_plural = gettext_lazy('obras')
