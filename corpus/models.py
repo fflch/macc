@@ -62,6 +62,22 @@ class Publisher(TimeStampedModel):
         return self.name
 
 
+class Collection(TimeStampedModel):
+    class Meta:
+        verbose_name = gettext_lazy('coletânea')
+        verbose_name_plural = gettext_lazy('coletâneas')
+
+    year = models.PositiveIntegerField(verbose_name=gettext_lazy('ano'))
+    title = models.CharField(
+        max_length=255, verbose_name=gettext_lazy('título'))
+    code = models.CharField(
+        max_length=20, verbose_name=gettext_lazy('código'), unique=True)
+    authors = models.ManyToManyField(
+        Translator, blank=True, verbose_name=gettext_lazy('autores'))
+    publisher = models.ForeignKey(
+        Publisher, null=True, blank=True, on_delete=models.RESTRICT, verbose_name=gettext_lazy('editora'))
+
+
 class Translation(TimeStampedModel):
     class Meta:
         verbose_name = gettext_lazy('tradução')
