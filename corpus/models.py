@@ -83,12 +83,8 @@ class Translation(TimeStampedModel):
         verbose_name = gettext_lazy('tradução')
         verbose_name_plural = gettext_lazy('traduções')
 
-    year = models.PositiveIntegerField(null=True, verbose_name=gettext_lazy('ano'))
-    title = models.CharField(max_length=255, verbose_name=gettext_lazy('título'))
-    code = models.CharField(max_length=20, verbose_name=gettext_lazy('código'), unique=True)
-    work = models.ForeignKey(Work, on_delete=models.RESTRICT, related_name=gettext_lazy('original'))
-    authors = models.ManyToManyField(Author, verbose_name=gettext_lazy('autores'))
-    publisher = models.ForeignKey(Publisher, null=True, on_delete=models.RESTRICT, related_name=gettext_lazy('editora'))
+    authors = models.ManyToManyField(
+        Translator, blank=True, verbose_name=gettext_lazy('autores'))
 
     def __str__(self) -> str:
         return self.title
