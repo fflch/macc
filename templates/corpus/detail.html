@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+
+{% block content %}
+
+<h1>{{ work.title }} ({{ work.year }})</h1>
+
+{% for original_fragment in work.originalfragment_set.all %}
+<p>{{ original_fragment.fragment }}</p>
+{% endfor %}
+
+
+
+{% endblock content %}

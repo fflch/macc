@@ -6,6 +6,8 @@
 
 <h1>{{ work.title }} ({{ work.year }})</h1>
 
+<p><a href="{% url 'corpus:detail' pk=work.id %}">Ler</a></p>
+
 {% if work.translation_sel.all|length_is:"0" %}
 <p>{% translate "Não há traduções para a obra selecionada." %}</p>
 {% else %}
