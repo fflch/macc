@@ -14,8 +14,8 @@ def load_romances(apps, schema_editor):
     OriginalFragment = apps.get_model('corpus', 'OriginalFragment')
     TranslatedFragment = apps.get_model('corpus', 'TranslatedFragment')
 
-    df_pt = pd.read_csv('corpus/migrations/data/romances_pt.csv')
-    df_en = pd.read_csv('corpus/migrations/data/romances_en.csv')
+    df_pt = pd.read_csv('corpus/migrations/data/romances_original.csv')
+    df_en = pd.read_csv('corpus/migrations/data/romances_translations.csv')
 
     for code, indices in df_pt.groupby('work_id').groups.items():
         work = Work.objects.filter(code=code).get()
