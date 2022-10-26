@@ -55,10 +55,16 @@
 
 {% for fragment in result %}
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-md-1">
+    <a href="{% url 'corpus:show' pk=fragment.work.id %}">{{ fragment.work.code }}</a>
+  </div>
+  <div class="col-md-5">
     <p>{% firstof fragment.headline_original|safe fragment.fragment %}</p>
   </div>
-  <div class="col-md-6">
+  <div class="col-md-1">
+    <a href="{% url 'corpus:show' pk=fragment.work.id %}">{{ fragment.translation_code }}</a>
+  </div>
+  <div class="col-md-5">
     <p>{{ fragment.headline_translation|safe }}</p>
   </div>
 </div>

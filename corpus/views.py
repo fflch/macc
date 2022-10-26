@@ -78,7 +78,8 @@ def search(request):
                                                 start_sel='<strong>',
                                                 stop_sel='</strong>',
                                                 min_words=1000,
-                                                max_words=10000)
+                                                max_words=10000),
+            translation_code=F('translatedfragment__work__code'),
         )
 
         context['result'] = qs
