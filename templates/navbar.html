@@ -1,9 +1,4 @@
 {% load i18n %}
-{% load pages_extras %}
-
-{% get_current_language as CURRENT_LANGUAGE %}
-{% get_available_languages as AVAILABLE_LANGUAGES %}
-{% get_language_info_list for AVAILABLE_LANGUAGES as LANGUAGES %}
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="/">MACC</a>
@@ -13,10 +8,27 @@
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="catalog-dropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {% translate "Catálogo" %}
+        </a>
+        <div class="dropdown-menu" aria-labelledby="catalog-dropdown">
+          <a class="dropdown-item" href="{% url 'corpus:index' %}">{% translate "Romances" %}</a>
+          <a class="dropdown-item" href="{% url 'corpus:index' %}">{% translate "Contos" %}</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="{% url 'corpus:index' %}">{% translate "Ver todas as obras" %}</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'corpus:search' %}">{% translate "Corpus" %}</a>
+      </li>
+    </ul>
+
     <div class="form-inline ml-auto">
-      <div class="btn-group" role="group" aria-label="{% trans "Idioma" %}">
-          <a class="btn bg-transparent" href="/pt-br/"><i class="flag flag-br"></i></a>
-          <a class="btn bg-transparent" href="/en-us/"><i class="flag flag-us"></i></a>
+      <div class="btn-group" role="group" aria-label="{% translate "Idioma" %}">
+          <a class="btn bg-transparent" href="/pt-br/{{ request.get_full_path|slice:"7:" }}"><i class="flag flag-br"></i></a>
+          <a class="btn bg-transparent" href="/en-us/{{ request.get_full_path|slice:"7:" }}"><i class="flag flag-us"></i></a>
       </div>
     </div>
   </div>

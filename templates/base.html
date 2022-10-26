@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -13,7 +14,7 @@
   <link rel="stylesheet" href="{% static 'css/font.css' %}">
   {% block css %}{% endblock css %}
 
-  <title>MACC | {% block title %}Machado de Assis Corpus e Catálogo{% endblock title %}</title>
+  <title>MACC | {% block title %}{% translate "Machado de Assis Corpus e Catálogo" %}{% endblock title %}</title>
 </head>
 <body>
   {% include 'navbar.html' %}
