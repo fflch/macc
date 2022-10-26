@@ -11,9 +11,9 @@ pandas = "*"
 django-debug-toolbar = "*"
 dj_database_url = "*"
 django_heroku = "*"
+ipython = "*"
 
 [dev-packages]
-ipython = "*"
 autopep8 = "*"
 
 [requires]
