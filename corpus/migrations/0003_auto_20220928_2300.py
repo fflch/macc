@@ -3,6 +3,10 @@
 from django.db import migrations
 import pandas as pd
 
+import logging
+
+logger = logging.getLogger(__name__)
+
 
 def load_romances(apps, schema_editor):
     Work = apps.get_model('corpus', 'Work')
@@ -24,10 +28,14 @@ def load_romances(apps, schema_editor):
             for fragment, code in df_en.loc[lambda d: (d['aligned_id'] == row['aligned_id'])
                                             & (d['work_id'].str.startswith(row['work_id'][:5])),
                                             ['line', 'work_id']].values:
-                work_ = Translation.objects.filter(code=code).get()
-
-                translations.append(TranslatedFragment(
-                    work=work_, fragment=fragment, original=original))
+                try:
+                    work_ = Translation.objects.filter(code=code).get()
+                except Translation.DoesNotExist:
+                    logger.debug(
+                        f"Could not find Translation with code {code}")
+                else:
+                    translations.append(TranslatedFragment(
+                        work=work_, fragment=fragment, original=original))
 
         TranslatedFragment.objects.bulk_create(translations)
 
