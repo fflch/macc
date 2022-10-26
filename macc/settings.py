@@ -31,7 +31,15 @@ SECRET_KEY = 'django-insecure-+wu$)x%spjdwqr6!j-%k!)8@m%vmy95to%j+5!gwgtyq^#$zjb
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'https://macc-corpus-and-catalog.herokuapp.com'
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://*.herokuapp.com',
+    'https://*.127.0.0.1'
+]
+
 
 INTERNAL_IPS = [
     '127.0.0.1'
