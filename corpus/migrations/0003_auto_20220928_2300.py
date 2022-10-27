@@ -42,10 +42,34 @@ def load_romances(apps, schema_editor):
 
 def load_short_stories(apps, schema_editor):
     Work = apps.get_model('corpus', 'Work')
-    Collection = apps.get_model('corpus', 'Collection')
     Translation = apps.get_model('corpus', 'Translation')
     OriginalFragment = apps.get_model('corpus', 'OriginalFragment')
     TranslatedFragment = apps.get_model('corpus', 'TranslatedFragment')
+
+    df_pt = pd.read_csv('corpus/migrations/data/contos_original.csv')
+    df_en = pd.read_csv('corpus/migrations/data/contos_translations.csv')
+
+    for code, indices in df_pt.groupby('work_id').groups.items():
+        work = Work.objects.filter(code=code).get()
+        translations = []
+        for _, row in df_pt.loc[indices, :].iterrows():
+            original = OriginalFragment(work=work, fragment=row['line'])
+            original.save()
+            original.refresh_from_db()
+
+            for fragment, code in df_en.loc[lambda d: (d['aligned_id'] == row['aligned_id'])
+                                            & (d['work_id'].str.startswith(row['work_id'][:5])),
+                                            ['line', 'work_id']].values:
+                try:
+                    work_ = Translation.objects.filter(code=code).get()
+                except Translation.DoesNotExist:
+                    logger.debug(
+                        f"Could not find Translation with code {code}")
+                else:
+                    translations.append(TranslatedFragment(
+                        work=work_, fragment=fragment, original=original))
+
+        TranslatedFragment.objects.bulk_create(translations)
 
 
 def rollback_romances(apps, schema_editor):
