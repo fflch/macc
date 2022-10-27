@@ -4,7 +4,7 @@
 
 {% block content %}
 
-<h1>Search</h1>
+<h1>{% translate "Corpus - Busca" %}</h1>
 
 <form action="{% url 'corpus:search' %}" method="post">
   {% csrf_token %}

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-28 06:25+0000\n"
+"POT-Creation-Date: 2022-10-27 02:29+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -130,73 +130,125 @@ msgstr "translated fragment"
 msgid "fragmentos traduzidos"
 msgstr "translated fragments"
 
-#: corpus/urls.py:9
-msgid "works/"
-msgstr ""
-
-#: corpus/urls.py:10
-msgid "works/<int:pk>"
-msgstr ""
-
-#: macc/settings.py:125
+#: macc/settings.py:146
 msgid "Português (Brasil)"
 msgstr "Portuguese (Brazil)"
 
-#: macc/settings.py:126
+#: macc/settings.py:147
 msgid "Inglês (EUA)"
 msgstr "English (USA)"
 
-#: macc/urls.py:26
-msgid "corpus/"
-msgstr ""
-
-#: templates/base.html:17 templates/page/home.html:8
+#: templates/base.html:17
 msgid "Machado de Assis Corpus e Catálogo"
-msgstr "Machado de Assis Corpus and Catalog"
+msgstr "Machado de Assis Corpus and Catalogue"
 
-#: templates/corpus/index.html:7
+#: templates/corpus/index.html:12 templates/navbar.html:14
 msgid "Catálogo"
-msgstr "Catalog"
+msgstr "Catalogue"
 
-#: templates/corpus/index.html:8
+#: templates/corpus/index.html:14 templates/navbar.html:17
 msgid "Romances"
 msgstr "Novels"
 
-#: templates/corpus/index.html:14 templates/corpus/index.html:40
-#: templates/corpus/show.html:16
+#: templates/corpus/index.html:20 templates/corpus/index.html:46
+#: templates/corpus/show.html:18
 msgid "Código"
 msgstr "Code"
 
-#: templates/corpus/index.html:15 templates/corpus/index.html:41
-#: templates/corpus/show.html:17
+#: templates/corpus/index.html:21 templates/corpus/index.html:47
+#: templates/corpus/show.html:19
 msgid "Título"
 msgstr "Title"
 
-#: templates/corpus/index.html:16 templates/corpus/index.html:42
-#: templates/corpus/show.html:18
+#: templates/corpus/index.html:22 templates/corpus/index.html:48
+#: templates/corpus/show.html:20
 msgid "Ano"
 msgstr "Year"
 
-#: templates/corpus/index.html:17 templates/corpus/index.html:43
+#: templates/corpus/index.html:23 templates/corpus/index.html:49
 msgid "Traduções"
 msgstr "Translations"
 
-#: templates/corpus/index.html:34
+#: templates/corpus/index.html:40 templates/navbar.html:18
 msgid "Contos"
 msgstr "Short stories"
 
-#: templates/corpus/show.html:10
+#: templates/corpus/search.html:7
+msgid "Corpus - Busca"
+msgstr "Corpus - Search"
+
+#: templates/corpus/search.html:18
+msgid "Pesquisar..."
+msgstr "Search..."
+
+#: templates/corpus/search.html:29
+#, fuzzy
+#| msgid "Português (Brasil)"
+msgid "Português"
+msgstr "Portuguese (Brazil)"
+
+#: templates/corpus/search.html:38
+#, fuzzy
+#| msgid "Inglês (EUA)"
+msgid "Inglês"
+msgstr "English (USA)"
+
+#: templates/corpus/search.html:47
+msgid "Buscar frase"
+msgstr ""
+
+#: templates/corpus/show.html:12
 msgid "Não há traduções para a obra selecionada."
 msgstr ""
 
-#: templates/corpus/show.html:19
+#: templates/corpus/show.html:21
 msgid "Tradutores"
 msgstr "Translators"
 
-#: templates/navbar.html:18
+#: templates/navbar.html:20
+msgid "Ver todas as obras"
+msgstr ""
+
+#: templates/navbar.html:24
+msgid "Corpus"
+msgstr ""
+
+#: templates/navbar.html:29
 msgid "Idioma"
 msgstr "Language"
 
 #: templates/page/home.html:7
 msgid "Bem-vindo ao MACC!"
 msgstr "Welcome to MACC!"
+
+#: templates/page/home.html:17
+#, python-format
+msgid ""
+"\n"
+"        O Machado de Assis – Corpus & Catálogo (MACC) é fruto de um projeto "
+"de\n"
+"        mestrado dedicado a criar uma ferramenta para auxiliar a comunidade "
+"de\n"
+"        pesquisadores e profissionais das áreas de tradução, literatura e "
+"linguística.\n"
+"        A seção <a href=\"%(corpus_index_url)s\">Catálogo</a> reúne as "
+"traduções publicadas em\n"
+"        língua inglesa do autor Machado de Assis em um catálogo atualizado\n"
+"        e com informações relevantes como ano de publicação e tradutores da "
+"obra.\n"
+"        Enquanto na seção <a href=\"%(corpus_search_url)s\">Corpus</a>, "
+"tradutores e pesquisadores poderão\n"
+"        comparar como diferentes versões traduziram termos e trechos "
+"específicos da obra machadiana.\n"
+"      "
+msgstr ""
+"\n"
+"Machado de Assis – Corpus & Catalogue (MACC) is the product of master's"
+" degree project dedicated to creating a tool for the community of researchers"
+" and professionals in Translation Studies, Literature, and Linguistics."
+" The <a href=\"%(corpus_index_url)s\">Catalogue</a> section shows all of Machado de Assis' works that"
+" were translated and published in the English Language in an updated Catalogue"
+" full of relevant information such as the year of publication and its translators."
+" In the <a href=\"%(corpus_search_url)s\">Corpus</a>, translators and researchers may compare"
+" how different published versions have translated specific works and excerpts of Machado de Assis' works."
+
