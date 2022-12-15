@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}Yayá Garcia: A Novel{% endblock title %}
+
+{% block content %}
+
+    <h1>{% translate "1976 – Yayá Garcia: A Novel" %}</h1>
+    <h2>{% translate "Tradução de Iaiá Garcia;"%}</h2>
+    <h2>{% translate "Tradutor(a): Robert L. Scott-Buccleuch;"%}</h2>
+    <h2>{% translate "Editora: Peter Owen. Londres, Inglaterra."%}</h2>
+
+{% blocktrans %}
+No prefácio do tradutor, Scott-Buccleuch apresenta Machado de Assis como alguém que ocupa uma posição única na literatura brasileira e um gênio inquestionável.
+{% endblocktrans %}
+
+{% endblock content %}

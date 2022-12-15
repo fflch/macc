@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %} The Psychiatrist, and Other Stories {% endblock title %}
+
+{% block content %}
+
+    <h1>{% translate "1963 – The Psychiatrist, and Other Stories" %}</h1>
+    <h2>{% translate "Antologia de contos;"%}</h2>
+    <h2>{% translate "Tradutor(a): William L. Grossman e Helen Caldwell;"%}</h2>
+    <h2>{% translate "Editora: University of California Press. Berkeley, EUA."%}</h2>
+
+{% blocktrans %}
+Na década de 60, Grossman e Caldwell, reconhecidos pelas traduções de Dom Casmurro e Memórias Póstumas de Brás Cubas se juntam para traduzir a primeira coletânea de contos exclusivamente de obras de Machado de Assis para língua inglesa. A antologia, intitulada The Psychiatrist, and Other Stories (1963), publicada pela University of California Press, traz dez contos do autor. É possível encontrar uma nova tiragem impressa da UC Press.
+{% endblocktrans %}
+
+{% endblock content %}

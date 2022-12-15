@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}Dom Casmurro: English Edition{% endblock title %}
+
+{% block content %}
+
+    <h1>{% translate "2018 – Dom Casmurro: English Edition" %}</h1>
+    <h2>{% translate "Retradução de Dom Casmurro;"%}</h2>
+    <h2>{% translate "Tradutor(a): Neil McArthur;"%}</h2>
+    <h2>{% translate "Editora: Lexicos Publishing. País não informado."%}</h2>
+
+{% blocktrans %}
+Essa retradução de Dom Casmurro é a mais recente presente nesse catálogo e data de 2018. Publicada pela editora Lexicos Publishing em formato eletrônico, a editora em questão não tem um website oficial, tampouco revela seu país de origem na contracapa do e-book. Todos os outros títulos publicados pela mesma editora também são em formato eletrônico e não informam país de origem.
+{% endblocktrans %}
+
+{% endblock content %}

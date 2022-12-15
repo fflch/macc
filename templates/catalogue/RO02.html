@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}Dom Casmurro: A Novel{% endblock title %}
+
+{% block content %}
+
+    <h1>{% translate "1953 – Dom Casmurro: A Novel" %}</h1>
+    <h2>{% translate "Tradução de Dom Casmurro"%}</h2>
+    <h2>{% translate "Tradutor(a): Helen Caldwell;"%}</h2>
+    <h2>{% translate " "%}</h2>
+    <h2>{% blocktrans %} Editora: Noonday Press Nova York, EUA;<br>
+Outras edições da tradução:<br>
+Dom Casmurro: A Novel (1966), ed. University of California Press. Berkeley, EUA;<br>
+Dom Casmurro: A Novel (1993), ed. Farrar Straus and Giroux. Nova York, EUA;<br>
+Dom Casmurro: A Novel (2014), ed. Daunt Books. Londres, Inglaterra.<br>
+{% endblocktrans %}</h2>
+
+{% blocktrans %}
+Enquanto Memórias Póstumas de Brás Cubas (1881) era traduzido por Grossman, Dom Casmurro (1899) estava sendo traduzido por Helen Caldwell e Dom Casmurro: A Novel foi publicado em 1953 pela Noonday Press. Essa mesma tradução foi relançada pela Daunt Books em 2015 em capa impressa em papel e versão e-book.<br>
+Foi durante a tradução do romance que Caldwell iniciou a tese que geraria uma enorme reviravolta na interpretação de Dom Casmurro na crítica literária brasileira. Já nas cartas que foram trocadas entre Helen Caldwell e Cecil Hemley, editor da Noonday, e analisadas por Hélio de Seixas Guimarães (GUIMARÃES, 2019), Caldwell expressa que discorda da crítica brasileira. De acordo com Caldwell, o livro não se trata de uma história de adultério feminino, mas de neurose masculina. Em 1960, chega às prateleiras para leitores anglófonos The Brazilian Othello of Machado de Assis, publicado inicialmente pela University of California Press e traduzida para o português por Fábio Fonseca de Melo em 2002. (CALDWELL, 2002).<br>
+Se aqui, no Brasil, seu nome é mais conhecido pela sua tradução e crítica de Machado de Assis, em seu país natal, Caldwell foi professora do departamento de letras clássicas da Universidade da Califórnia em Los Angeles (UCLA), onde ela é mais reconhecida pelo seu trabalho com autores gregos e romanos, do que pelo seu trabalho com literatura brasileira.<br>
+{% endblocktrans %}
+
+{% endblock content %}

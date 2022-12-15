@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}A Chapter of Hats and Other Stories{% endblock title %}
+
+{% block content %}
+
+    <h1>{% translate "2008 – A Chapter of Hats and Other Stories" %}</h1>
+    <h2>{% translate "Antologia de contos;"%}</h2>
+    <h2>{% translate "Tradutor(a): John Gledson;"%}</h2>
+    <h2>{% translate "Editora: Bloomsbury Publishing. Londres, Inglaterra."%}</h2>
+
+{% blocktrans %}
+A antologia A Chapter of Hats and Other Stories (2008) traz vinte contos selecionados e traduzidos por John Gledson. No prefácio dessa edição publicada pela Bloomsbury, o tradutor comenta sobre o reconhecimento que Machado, com nove romances traduzidos para língua inglesa até esse momento, recebeu de críticos norte-americanos e que o escritor carioca deveria receber mais atenção por seus contos também. A partir de 2012, haverá um crescimento exponencial de antologia de contos do autor.
+{% endblocktrans %}
+
+{% endblock content %}

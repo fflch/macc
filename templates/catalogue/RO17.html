@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}Casa Velha: The Old House{% endblock title %}
+
+{% block content %}
+
+    <h1>{% translate "2010 - Casa Velha: The Old House" %}</h1>
+    <h2>{% translate "Tradução de Casa Velha;"%}</h2>
+    <h2>{% translate "Tradutor(a): Mark Carlyon"%}</h2>
+    <h2>{% translate "Editora: Cidade Viva. Rio de Janeiro, Brasil."%}</h2>
+
+{% blocktrans %}
+Casa Velha (1885) já foi classificada como conto, novela e até romance por diversos críticos, para a página Catálogo, a obra será agrupada com os romances, dado que não está em nenhuma antologia de contos e em sua única tradução, Casa Velha: The Old House (2010) não consta no Corpus. Casa Velha (1885) recebeu sua primeira tradução em 2010, publicado pela editora brasileira Cidade Viva e traduzido por Mark Carlyon. Costa e Freitas (2014) analisaram os paratextos da edição que faz parte da coleção River of January – O Rio de Janeiro visto por seus escritores, o livro em questão só pode ser encontrado em versão física.
+{% endblocktrans %}
+
+{% endblock content %}

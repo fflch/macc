@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %} 2000 – Esau and Jacob {% endblock title %}
+
+{% block content %}
+
+    <h1>{% content "Esau and Jacob" %}</h1>
+    <h2>{% translate "Retradução de Esaú e Jacó;"%}</h2>
+    <h2>{% translate "Tradutor(a): Elizabeth Lowe;"%}</h2>
+    <h2>{% translate "Editora: Oxford University Press. Oxford, Inglaterra."%}</h2>
+
+{% blocktrans %}
+Esau and Jacob (2000) é a última retradução de Machado de Assis lançada pela coleção Library of Latin America pela Oxford University Press, a obra Esaú e Jacó (1904) foi traduzida por Elizabeth Lowe.
+{% endblocktrans %}
+
+{% endblock content %}
