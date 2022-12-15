@@ -1,9 +1,15 @@
 from django.shortcuts import render
 from django.contrib.postgres.search import SearchQuery, SearchVector, SearchHeadline
-from django.db.models import F
+from django.db.models import F, Q
 
 
 from .models import OriginalFragment, Work
+
+
+from functools import reduce
+from logging import getLogger
+
+logger = getLogger(__name__)
 
 
 def index(request):
@@ -35,50 +41,72 @@ def detail(request, pk: int):
 
 
 def search(request):
-    search_pt = True if request.POST.get('search-pt') else False
-    search_en = True if request.POST.get('search-en') else False
-    phrase = True if request.POST.get('phrase') else False
-    q = request.POST.get('q')
+    search_languages = request.POST.get('search-language', [])
 
-    context = {}
+    context = {
+        'pt': 'pt' in search_languages,
+        'en': 'en' in search_languages,
+    }
+
+    search_columns = []
+    if 'pt' in search_languages:
+        search_columns.append('fragment')
+    if 'en' in search_languages:
+        search_columns.append('translatedfragment__fragment')
+
     if request.POST:
-        context['q'] = q
-        if phrase:
-            context['phrase'] = 'on'
-        search_columns = []
+        q = request.POST.get('q')
 
-        if search_pt:
-            context['search_pt'] = 'on'
-            search_columns.append('fragment')
-        if search_en:
-            context['search_en'] = 'on'
-            search_columns.append('translatedfragment__fragment')
+        qs = (OriginalFragment
+              .objects
+              .prefetch_related('translatedfragment_set')
+              .all())
 
-        search_vector = SearchVector(*search_columns)
-        search_query = SearchQuery(
-            q, search_type='phrase' if phrase else 'plain')
-
-        qs = (OriginalFragment.objects
-              .annotate(search=search_vector)
-              .filter(search=search_query)
-              )
+        match request.POST.get('search-method'):
+            case 'broad':
+                search_vector = SearchVector(*search_columns)
+                search_query = SearchQuery(q)
+                qs = qs.annotate(search=search_vector).filter(
+                    search=search_query)
+            case 'exact':
+                filters = [{f'{col}__iregex': fr'\y{q}\y'}
+                           for col in search_columns]
+                queries = [Q(**args) for args in filters]
+                qs_filter = reduce(Q.__or__, queries)
+                qs = qs.filter(qs_filter)
+            case 'start':
+                filters = [{f'{col}__iregex': fr'\y{q}'}
+                           for col in search_columns]
+                queries = [Q(**args) for args in filters]
+                qs_filter = reduce(Q.__or__, queries)
+                qs = qs.filter(qs_filter)
+            case 'end':
+                filters = [{f'{col}__iregex': fr'{q}\y'}
+                           for col in search_columns]
+                queries = [Q(**args) for args in filters]
+                qs_filter = reduce(Q.__or__, queries)
+                qs = qs.filter(qs_filter)
+            case _: pass
 
         qs = qs.annotate(
             headline_original=SearchHeadline(
                 'fragment',
-                search_query if search_pt else '',
+                SearchQuery(q) if 'pt' in search_languages else '',
                 start_sel='<strong>',
                 stop_sel='</strong>',
                 min_words=1000,
                 max_words=10000)
         )
         qs = qs.annotate(
-            headline_translation=SearchHeadline('translatedfragment__fragment',
-                                                search_query if search_en else '',
-                                                start_sel='<strong>',
-                                                stop_sel='</strong>',
-                                                min_words=1000,
-                                                max_words=10000),
+            headline_translation=SearchHeadline(
+                'translatedfragment__fragment',
+                SearchQuery(q)
+                if 'en' in search_languages else '',
+                start_sel='<strong>',
+                stop_sel='</strong>',
+                min_words=1000,
+                max_words=10000
+            ),
             translation_code=F('translatedfragment__work__code'),
         )
 

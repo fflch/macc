@@ -9,51 +9,115 @@
 <form action="{% url 'corpus:search' %}" method="post">
   {% csrf_token %}
   <div class="form-row">
-    <div class="col-md-4 mx-auto">
-      <div class="form-group">
-        <input
-          class="form-control"
-          type="text"
-          name="q"
-          placeholder="{% translate 'Pesquisar...' %}"
-          {% if q %}value="{{ q }}"{% endif %} >
-      </div>
-      <div class="form-group">
-        <div class="form-check form-check-inline">
-          <input
-            class="form-check-input"
-            name="search-pt"
-            type="checkbox"
-            id="pt-br-check"
-            {% if search_pt %}checked{% endif %}>
-          <label class="form-check-label" for="pt-br-check">{% translate "Português" %}</label>
+    <div class="col-md-5 mx-auto">
+      <div class="form-row">
+        <div class="col-md-10">
+          <div class="form-group">
+            <input
+              class="form-control"
+              type="text"
+              name="q"
+              placeholder="{% translate 'Pesquisar...' %}"
+              {% if 'q' in request.POST %}
+                value="{{ request.POST.q }}"
+              {% endif %} >
+          </div>
         </div>
-        <div class="form-check form-check-inline">
-          <input
-            class="form-check-input"
-            name="search-en"
-            type="checkbox"
-            id="pt-br-check"
-            {% if search_en %}checked{% endif %}>
-          <label class="form-check-label" for="pt-br-check">{% translate "Inglês" %}</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input
-            class="form-check-input"
-            name="phrase"
-            type="checkbox"
-            id="phrase-check"
-            {% if phrase %}checked{% endif %}>
-          <label class="form-check-label" for="pt-br-check">{% translate "Buscar frase" %}</label>
+        <div class="col-md-2">
+          <button class="btn btn-primary ml-auto" type="submit">Pesquisar</button>
         </div>
       </div>
-      <button class="btn btn-primary ml-auto" type="submit">Pesquisar</button>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="col-md-5 mx-auto">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <legend class="col-form-label">Buscar em...</legend>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              name="search-language"
+              type="checkbox"
+              value="pt"
+              id="pt-br-check"
+              {% if pt %}
+                checked
+              {% endif %}
+              >
+            <label class="form-check-label" for="pt-br-check">{% translate "Português" %}</label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              name="search-language"
+              type="checkbox"
+              value="en"
+              id="en-us-check"
+              {% if en %}
+                checked
+              {% endif %}
+              >
+            <label class="form-check-label" for="en-us-check">{% translate "Inglês" %}</label>
+          </div>
+        </div>
+        <div class="form-group col-md-6">
+          <legend class="col-form-label">Modo de busca</legend>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="search-method"
+              id="search-method-1"
+              value="broad" checked>
+            <label class="form-check-label" for="search-method-1">
+              Busca ampla
+            </label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="search-method"
+              id="search-method-2"
+              value="exact">
+            <label class="form-check-label" for="search-method-2">
+              Busca exata
+            </label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="search-method"
+              id="search-method-3"
+              value="start">
+            <label class="form-check-label" for="search-method-3">
+              Início
+            </label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="search-method"
+              id="search-method-4"
+              value="end">
+            <label class="form-check-label" for="search-method-4">
+              Final
+            </label>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </form>
 
 
 {% for fragment in result %}
+{% ifchanged fragment.pk %}
+<hr/>
+{% endifchanged %}
 <div class="row">
   <div class="col-md-1">
     <a href="{% url 'corpus:show' pk=fragment.work.id %}">{{ fragment.work.code }}</a>
@@ -71,5 +135,7 @@
 {% empty %}
 {% if q %}<p>Nothing found for {{ q }}</p>{% endif %}
 {% endfor %}
+
+{% comment %} {{ result }} {% endcomment %}
 
 {% endblock content %}
