@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}Philosopher or Dog?{% endblock title %}
+
+{% block content %}
+
+    <h1>{% translate "1954 – Philosopher or Dog?" %}</h1>
+    <h2>{% translate "Tradução de Quincas Borba;"%}</h2>
+    <h2>{% translate "Tradutor(a): Clotilde Wilson;"%}</h2>
+    <h2>{% blocktrans %}Editora: Noonday Press. Nova York, EUA.<br>
+Outras edições da tradução:<br>
+The Heritage of Quincas Borba (1957), ed. W.H. Allen & Co. Nova York, EUA;<br>
+The Heritage of Quincas Borba (1992), ed. Farrar, Straus and Giroux. Nova York, EUA;<br>
+Quincas Borba: A Novel (1998), ed. Oxford University Press. Oxford, Inglaterra.<br>
+{% endblocktrans%}</h2>
+
+{% blocktrans %}
+Philosopher or Dog? (1954) foi a terceira tradução de um romance de Machado de Assis a receber tradução para inglês. A editora responsável foi a Noonday Press, que também publicou Dom Casmurro: A Novel (1953) e Epitaph of a Small Winner (1952). A tradutora de Quincas Borba (1891) foi a professora e crítica literária Clotilde Wilson. Provavelmente, a mudança de título teve as mesmas motivações editoriais que Epitaph of a Small Winner (1952).<br>
+Apesar dos três romances, Epitaph of a Small Winner (1952), Dom Casmurro: A Novel (1953) e Philosopher or Dog? (1954), terem sido publicados em datas muito próximas pela editora Noonday Press, Guimarães e Oliveira (2021) apuraram, ao analisar documentos e cartas entre o editor Cecil Hemley e a tradutora Clotilde Wilson, que o lançamento da tríade de romances não fazia parte de um projeto prévio de tradução. Cecil Hemley seguiu com a publicação do terceiro título.
+{% endblocktrans %}
+
+{% endblock content %}

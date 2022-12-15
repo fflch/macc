@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}Brazilian Tales{% endblock title %}
+
+{% block content %}
+
+    <h1>{% translate "1921 – Brazilian Tales" %}</h1>
+    <h2>{% translate "Antologia de contos;"%}</h2>
+    <h2>{% translate "Tradução: Isaac Goldberg"%}</h2>
+    <h2>{% translate "Editora: The Four Seas Company. Boston, EUA."%}</h2>
+
+{% blocktrans %}
+Brazilian Tales (1921) é uma antologia de 6 contos de autores brasileiros, sendo três do Machado de Assis, um de José Medeiros e Albuquerque, um de Coelho Netto e um de Carmen Dolores (pseudônimo de Emília Moncorvo Bandeira de Melo) publicada há exatos 100 anos. Essa antologia marca o início da linha temporal, pois foi a primeira vez que Machado de Assis foi publicado em inglês, embora o autor já tivesse obras traduzidas para o espanhol desde 1902 (GUERINI, FREITAS, COSTA: 2012, p. 11). No prefácio da antologia, Goldberg faz uma breve apresentação de alguns autores e movimentos da literatura brasileira, claramente influenciado pelos escritos de Érico Veríssimo e declara que a presente coletânea não pretende ser uma seleção completa e definitiva, mas apenas uma amostra de contos brasileiros.
+Além de tradutor, Goldberg foi jornalista do jornal Boston Evening Transcript, e escritor. Publicou diversos livros sobre literatura brasileira e hispano-americana: Brazilian literature (1922), Studies in Spanish-American literature (1920) e A Guide to Cervantes (1920).
+{% endblocktrans %}
+
+{% endblock content %}

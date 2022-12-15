@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}The Devil's Church{% endblock title %}
+
+{% block content %}
+
+    <h1>{% translate "2020 – The Devil's Church" %}</h1>
+    <h2>{% translate "Tradução do conto A Igreja do Diabo;"%}</h2>
+    <h2>{% translate "Tradutor(a): M. Prado;"%}</h2>
+    <h2>{% translate "Publicação Independente. País não informado."%}</h2>
+
+{% blocktrans %}
+Esta é uma tradução do conto A Igreja do Diabo (1883) publicada em e-book de forma independente e com pouca informação disponível sobre o tradutor e as motivações da publicação.
+{% endblocktrans %}
+
+{% endblock content %}

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}The Alienist{% endblock title %}
+
+{% block content %}
+
+    <h1>{% translate "2012 – The Alienist" %}</h1>
+    <h2>{% translate "Tradução do conto O Alienista;"%}</h2>
+    <h2>{% translate "Tradutor(a): William L. Grossman;"%}</h2>
+    <h2>{% translate "Editora: Melville House Publishing. Brooklyn, EUA."%}</h2>
+
+{% blocktrans %}
+Essa edição da Melville House Publishing traz um único conto, O Alienista (1882), traduzido por Grossman.
+{% endblocktrans %}
+
+{% endblock content %}

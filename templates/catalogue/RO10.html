@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}Helena: A Novel{% endblock title %}
+
+{% block content %}
+
+    <h1>{% translate "1984 – Helena: A Novel" %}</h1>
+    <h2>{% translate "Tradução de Helena;"%}</h2>
+    <h2>{% translate "Tradutor(a): Helen Caldwell;"%}</h2>
+    <h2>{% translate "Editora: University of California Press. Berkeley, EUA."%}</h2>
+
+{% blocktrans %}
+Helena (1876) foi o quarto romance de Machado de Assis traduzido por Caldwell e foi lançado pela University of California Press. A edição permaneceu esgotada por anos e em fevereiro de 2021 recebeu uma nova tiragem da editora em edição impressa com capa em papel.
+{% endblocktrans %}
+
+{% endblock content %}

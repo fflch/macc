@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}The Devil's Church and Other Stories{% endblock title %}
+
+{% block content %}
+
+    <h1>{% translate "1977 – The Devil's Church and Other Stories" %}</h1>
+    <h2>{% translate "Antologia de contos;"%}</h2>
+    <h2>{% translate "Tradutor(a): Jack Schmitt e Lorie Ishimatsu;"%}</h2>
+    <h2>{% blocktrans %}Editora: University of Texas. Press. Austin, EUA.<br>
+                        Outras edições da tradução: <br>
+                        The Devil's Church and Other Stories (1987), ed. Harper Collins Publishers Ltd. Londres, Inglaterra.<br>
+{% endblocktrans%}</h2>
+
+{% blocktrans %}
+The Devil's Church and Other Stories (1977) é a segunda antologia de contos exclusivamente com obras de Machado de Assis em língua inglesa, traduzida por Jack Schmitt e Lorie Chieko Ishimatsu. No prefácio da coletânea, a dupla de tradutores afirmou: "acreditamos que todos os nossos contos, considerados de forma global, representam o estilo particular e a visão de mundo de Machado". (SCHMITT, ISHIMATSU, 1977)
+{% endblocktrans %}
+
+{% endblock content %}
