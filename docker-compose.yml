@@ -11,6 +11,12 @@ services:
     volumes:
       - data:/var/lib/postgresql/data
 
+  app:
+    build:
+      dockerfile: ./docker/Dockerfile
+    ports:
+      - 8000:8000
+
 volumes:
   data:
     driver: local
