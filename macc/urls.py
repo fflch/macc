@@ -23,6 +23,7 @@ urlpatterns = i18n_patterns(
     path('admin/', admin.site.urls),
     path('', include('page.urls')),
     path('corpus/', include('corpus.urls', namespace='corpus')),
+    path('catalogue/', include('catalogue.urls', namespace='catalogue')),
     path('__debug__/', include('debug_toolbar.urls')),
 )
 
