@@ -10,40 +10,34 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
-import django_heroku
 from pathlib import Path
 import os
 
 from django.utils.translation import gettext_lazy
 
-import dj_database_url
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-+wu$)x%spjdwqr6!j-%k!)8@m%vmy95to%j+5!gwgtyq^#$zjb'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DJANGO_ENV') == 'development'
 
 ALLOWED_HOSTS = [
-    'https://macc-corpus-and-catalog.herokuapp.com'
+    '*'
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://*.herokuapp.com',
     'https://*.127.0.0.1'
 ]
 
 
-INTERNAL_IPS = [
-    '127.0.0.1'
-]
+INTERNAL_IPS = []
 
 
 # Application definition
@@ -56,7 +50,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.postgres',
-    'debug_toolbar',
     'corpus',
     'page',
 ]
@@ -70,7 +63,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'macc.urls'
@@ -107,10 +99,6 @@ DATABASES = {
         'PORT': os.getenv('POSTGRES_PORT'),
     }
 }
-
-# DATABASES = {
-#     'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
-# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -179,5 +167,3 @@ LOGGING = {
         'level': 'WARNING',
     },
 }
-
-django_heroku.settings(locals())

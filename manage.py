@@ -11,12 +11,15 @@ env_files = [
     '.pg.env',
 ]
 
+
 def main():
     """Run administrative tasks."""
     for env_file in env_files:
         load_dotenv(env_file)
 
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'macc.settings')
+    SETTINGS_FILE = os.getenv('DJANGO_ENV') or 'base'
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE',
+                          f'macc.settings.{SETTINGS_FILE}')
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
