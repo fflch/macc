@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% load static %}
 
 {% block content %}
 <div class="row">
@@ -19,6 +20,9 @@
         A seção <a href="{{ corpus_index_url }}">Catálogo</a> reúne as traduções publicadas em língua inglesa do autor Machado de Assis em um catálogo atualizado e com informações relevantes como ano de publicação e tradutores da obra. <p>
         Enquanto na seção <a href="{{ corpus_search_url }}">Corpus</a>, tradutores e pesquisadores poderão comparar como diferentes versões traduziram termos e trechos específicos da obra machadiana. <p>
       {% endblocktranslate %}
+
+      <img src="{% static 'img/machado_de_assis_real.jpg' %}" alt="Machado de Assis">
+
     </p>
   </div>
 </div>
