@@ -14,22 +14,44 @@
           {% translate "Catálogo" %}
         </a>
         <div class="dropdown-menu" aria-labelledby="catalog-dropdown">
-          <a class="dropdown-item" href="{% url 'corpus:index' %}">{% translate "Romances" %}</a>
-          <a class="dropdown-item" href="{% url 'corpus:index' %}">{% translate "Contos" %}</a>
+          <a class="dropdown-item" href="{% url 'catalogue:search-portuguese' %}">{% translate "Romances" %}</a>
+          <a class="dropdown-item" href="{% url 'catalogue:search-english' %}">{% translate "Contos" %}</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="{% url 'corpus:index' %}">{% translate "Ver todas as obras" %}</a>
+          <a class="dropdown-item" href="{% url 'catalogue:timeline' %}">{% translate "Ver todas as obras" %}</a>
         </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'corpus:search' %}">{% translate "Corpus" %}</a>
+        <a
+          class="nav-link {% if not user.is_authenticated %}disabled{% endif %}"
+          href="{% url 'corpus:search' %}">
+            {% translate "Corpus" %}
+        </a>
       </li>
     </ul>
 
-    <div class="form-inline ml-auto">
-      <div class="btn-group" role="group" aria-label="{% translate "Idioma" %}">
-          <a class="btn bg-transparent" href="/pt-br/{{ request.get_full_path|slice:"7:" }}"><i class="flag flag-br"></i></a>
-          <a class="btn bg-transparent" href="/en-us/{{ request.get_full_path|slice:"7:" }}"><i class="flag flag-us"></i></a>
-      </div>
-    </div>
+    <ul class="navbar-nav ml-auto">
+      {% if not user.is_authenticated %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'account:register' %}">{% translate "Cadastre-se" %}</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'account:login' %}">{% translate "Entrar" %}</a>
+      </li>
+      {% else %}
+      <li class="nav-item">
+        <a href="{% url 'account:logout'%}" class="nav-link">{% translate "Sair" %}</a>
+      </li>
+      {% endif %}
+      <li class="nav-item">
+        <a class="nav-link" href="/pt-br/{{ request.get_full_path|slice:"7:" }}">
+          <i class="flag flag-br"></i>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/en-us/{{ request.get_full_path|slice:"7:" }}">
+          <i class="flag flag-us"></i>
+        </a>
+      </li>
+    </ul>
   </div>
 </nav>

@@ -10,6 +10,7 @@ python-dotenv = "*"
 pandas = "*"
 django-debug-toolbar = "*"
 ipython = "*"
+django-crispy-forms = "*"
 
 [dev-packages]
 autopep8 = "*"

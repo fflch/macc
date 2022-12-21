@@ -12,13 +12,15 @@
   <link rel="stylesheet" href="{% static 'css/mdb.min.css' %}">
   <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
   <link rel="stylesheet" href="{% static 'css/font.css' %}">
+  <link rel="stylesheet" href="{% static 'css/macc.css' %}">
   {% block css %}{% endblock css %}
 
   <title>MACC | {% block title %}{% translate "Machado de Assis Corpus e Catálogo" %}{% endblock title %}</title>
 </head>
 <body>
   {% include 'navbar.html' %}
-  <div class="container">
+  <div class="container mt-3">
+    {% include 'messages.html' %}
     {% block content %}{% endblock content %}
   </div>
 
@@ -26,6 +28,7 @@
   <script src="{% static 'js/jquery.min.js' %}"></script>
   <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
   <script src="{% static 'js/mdb.min.js' %}"></script>
+  <script src="{% static 'js/macc.js' %}"></script>
   {% block js %}{% endblock js %}
 </body>
 </html>

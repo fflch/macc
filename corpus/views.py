@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.contrib.postgres.search import SearchQuery, SearchVector, SearchHeadline
 from django.db.models import F, Q
+from django.contrib.auth.decorators import login_required
 
 
 from .models import OriginalFragment, Work
@@ -40,6 +41,7 @@ def detail(request, pk: int):
     return render(request, 'corpus/detail.html', context)
 
 
+@login_required
 def search(request):
     search_languages = request.POST.get('search-language', [])
 

@@ -52,6 +52,8 @@ INSTALLED_APPS = [
     'django.contrib.postgres',
     'corpus',
     'page',
+    'account',
+    'crispy_forms'
 ]
 
 MIDDLEWARE = [
