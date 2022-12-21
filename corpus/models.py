@@ -135,7 +135,22 @@ class Collection(TimeStampedModel):
         return self.title
 
 
+class TranslationQuerySet(models.QuerySet):
+    def novels(self):
+        return self.filter(code__startswith='RO')
+
+
+class TranslationManager(models.Manager):
+    def get_queryset(self):
+        return WorkQuerySet(self.model, using=self._db)
+
+    def novels(self):
+        return self.get_queryset().novels()
+
+
 class Translation(TimeStampedModel):
+    objects = TranslationManager()
+
     class Meta:
         verbose_name = gettext_lazy('tradução')
         verbose_name_plural = gettext_lazy('traduções')

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+
+<h1>{% translate "Linha do tempo" %}</h1>
+
+{% for work in result %}
+<a href="{% url 'catalogue:show' work.code %}">
+  <p class="h2">{{ work.title }}</p>
+</a>
+<p>{{ work.year }}</p>
+{% endfor %}
+
+{% endblock content %}

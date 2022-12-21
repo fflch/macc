@@ -10,13 +10,13 @@
     <ul class="navbar-nav mr-auto">
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" id="catalog-dropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          {% translate "Catálogo" %}
+          {% translate "Catálogo de traduções" %}
         </a>
         <div class="dropdown-menu" aria-labelledby="catalog-dropdown">
-          <a class="dropdown-item" href="{% url 'catalogue:search-portuguese' %}">{% translate "Romances" %}</a>
-          <a class="dropdown-item" href="{% url 'catalogue:search-english' %}">{% translate "Contos" %}</a>
+          <a class="dropdown-item" href="{% url 'catalogue:timeline' %}">{% translate "Linha do tempo" %}</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="{% url 'catalogue:timeline' %}">{% translate "Ver todas as obras" %}</a>
+          <a class="dropdown-item" href="{% url 'catalogue:search-portuguese' %}">{% translate "Busca por obras em língua portuguesa" %}</a>
+          <a class="dropdown-item" href="{% url 'catalogue:search-english' %}">{% translate "Busca por obras em língua inglesa" %}</a>
         </div>
       </li>
       <li class="nav-item">
