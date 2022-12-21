@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}The Posthumous Memoirs of Brás Cubas{% endblock title %}
+
+{% block content %}
+
+    <h1>{% translate "2018 – The Posthumous Memoirs of Brás Cubas" %}</h1>
+    <h2>{% translate "Retradução de Memórias Póstumas de Brás Cubas;"%}</h2>
+    <h2>{% translate "Tradutor(a): Neil McArthur;"%}</h2>
+    <h2>{% translate "Editora: Lexicos Publishing. País não informado."%}</h2>
+
+{% blocktrans %}
+O tradutor Neil McArthur e a editora Lexicos Publishing também publicaram uma retradução de Memórias Póstumas de Brás Cubas (1881) no mesmo ano em que laçaram Dom Casmurro: English Edition (2018). A editora não revela o país de origem.
+{% endblocktrans %}
+
+{% endblock content %}

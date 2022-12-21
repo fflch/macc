@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}The Posthumous Memoirs of Braz Cubas{% endblock title %}
+
+{% block content %}
+
+    <h1>{% translate "1955 – Posthumous Reminiscences of Braz Cubas;" %}</h1>
+    <h2>{% translate "Tradução de Memórias Póstumas de Brás Cubas;"%}</h2>
+    <h2>{% translate "Tradutor(a): Percy Ellis"%}</h2>
+    <h2>{% translate "Editora: Instituto Nacional do Livro. Rio de Janeiro, Brasil."%}</h2>
+
+{% blocktrans %}
+Memórias Póstumas de Brás Cubas (1881) inaugura as retraduções de Machado de Assis para língua inglesa.Posthumous Reminiscences of Braz Cubas recebe tradução de Percy Ellis e é, publicada pelo Instituto Nacional do Livro no Rio de Janeiro. Trata-se de uma edição que está disponível apenas em sebos e bibliotecas em versão física, pois não há novas tiragens do romance.
+{% endblocktrans %}
+
+{% endblock content %}

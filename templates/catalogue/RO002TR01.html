@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}The Hand & the Glove{% endblock title %}
+
+{% block content %}
+
+    <h1>{% translate "1970 – The Hand & the Glove"%}</h1>
+    <h2>{% translate "Tradução de A Mão e a Luva;"%}</h2>
+    <h2>{% translate "Tradutor(a): Albert I. Bagby Jr.;"%}</h2>
+    <h2>{% translate "Editora: University Press of Kentucky. Lexington, EUA."%}</h2>
+
+{% blocktrans %}
+O romance A Mão e a Luva (1874) foi publicado pela University Press of Kentucky, mesma universidade onde o tradutor do livro, Albert Bagby Jr., conclui seu doutorado. Bagby cresceu no Brasil falando português e inglês até se mudar para os Estados Unidos, onde seguiu com sua carreira acadêmica até virar professor do Departamento de Línguas Românicas na University of Corpus Christi
+{% endblocktrans %}
+
+{% endblock content %}
