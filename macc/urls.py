@@ -22,7 +22,7 @@ from django.conf.urls.i18n import i18n_patterns
 urlpatterns = i18n_patterns(
     path('admin/', admin.site.urls),
     path('account/', include('account.urls', namespace='account')),
-    path('', include('page.urls')),
+    path('', include('page.urls', namespace='page')),
     path('corpus/', include('corpus.urls', namespace='corpus')),
     path('catalogue/', include('catalogue.urls', namespace='catalogue')),
     path('__debug__/', include('debug_toolbar.urls')),
