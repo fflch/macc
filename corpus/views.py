@@ -8,13 +8,15 @@ from .models import OriginalFragment, Work
 
 
 from functools import reduce
-from logging import getLogger
-
-logger = getLogger(__name__)
 
 
 def index(request):
-    qs = Work.objects.prefetch_related('translation_set').all()
+    qs = (Work
+          .objects
+          .prefetch_related('translation_set')
+          .filter(translation__id__isnull=False)
+          .distinct()
+          .order_by('id'))
     context = {
         'novels': qs.novels(),
         'short_stories': qs.short_stories()
@@ -31,14 +33,6 @@ def show(request, pk: int):
     }
 
     return render(request, 'corpus/show.html', context)
-
-
-def detail(request, pk: int):
-    context = {
-        'work': Work.objects.prefetch_related('originalfragment_set').get(pk=pk)
-    }
-
-    return render(request, 'corpus/detail.html', context)
 
 
 @login_required
