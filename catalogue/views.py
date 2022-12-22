@@ -1,9 +1,9 @@
 from django.shortcuts import render
-from corpus.models import Translation, Collection
+from corpus.models import Translation, Collection, Work
 from django.db.models import F, Value
 from django.db.models.functions import Concat
 from django.contrib import messages
-from catalogue.forms import SearchEnglishForm
+from catalogue.forms import SearchEnglishForm, SearchPortugueseForm
 
 from logging import getLogger
 
@@ -42,7 +42,7 @@ def search_english(request):
         )
         .annotate(
             title_portuguese=F('work__title'),
-            title_english=F('work__title'),
+            title_english=F('title'),
             publisher_name=F('publisher__name'),
             place_name=Concat(
                 F('publisher__place__city'),
@@ -129,7 +129,32 @@ def search_english(request):
 
 
 def search_portuguese(request):
-    return render(request, f'catalogue/search_portuguese.html')
+    qs = (Work
+          .objects
+          .prefetch_related('translation_set')
+          .filter(translation__id__isnull=False)
+          .distinct()
+          .order_by('year'))
+
+    if request.POST:
+        form = SearchEnglishForm(request.POST)
+        if form.is_valid():
+            if form.cleaned_data['title_portuguese']:
+                qs = qs.filter(
+                    title__icontains=form.cleaned_data['title_portuguese'])
+            if form.cleaned_data['gender']:
+                for gender in form.cleaned_data['gender']:
+                    qs = qs.filter(code__icontains=gender)
+        else:
+            for field, errors in form.errors.items():
+                for error in errors:
+                    label = form.fields[field].label
+                    messages.error(request, f"{label}: {error}")
+        return render(request, f'catalogue/search_portuguese.html',
+                      {'form': form, 'result': qs})
+
+    form = SearchPortugueseForm()
+    return render(request, f'catalogue/search_portuguese.html', {'form': form})
 
 
 def show(request, code):

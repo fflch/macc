@@ -74,16 +74,18 @@
       </div>
       <div class="card-body">
         <dl class="row">
-          <dt class="col-sm-2">{% translate "Título original" %}</dt>
-          <dd class="col-sm-10 card-title h5">{{ work.title_portuguese }}</dd>
+          {% if work.title_portuguese %}
+            <dt class="col-sm-2">{% translate "Título original" %}</dt>
+            <dd class="col-sm-10 card-title h5">{{ work.title_portuguese }}</dd>
+          {% endif %}
 
-          {% if work.authors %}
-          <dt class="col-sm-2">{% translate "Autores" %}</dt>
-          <dd class="col-sm-10">
-            {% for author in work.authors.all %}
-              <p>{{ author.full_name }}</p>
-            {% endfor %}
-          </dd>
+          {% if work.authors.all %}
+            <dt class="col-sm-2">{% translate "Autores" %}</dt>
+            <dd class="col-sm-10">
+              {% for author in work.authors.all %}
+                <p>{{ author.full_name }}</p>
+              {% endfor %}
+            </dd>
           {% endif %}
 
           {% if work.publisher_name %}
@@ -100,9 +102,9 @@
     </div>
     {% empty %}
       {% if 'result' in request.POST %}
-      <p class="h2">{% translate "Não foram encontrados resultados para a busca" %}</p>
+        <p class="h2">{% translate "Não foram encontrados resultados para a busca" %}</p>
       {% else %}
-      <p class="h2">{% translate "Para ver os itens, realize uma busca" %}</p>
+        <p class="h2">{% translate "Para ver os itens, realize uma busca" %}</p>
       {% endif %}
     {% endfor %}
   </div>

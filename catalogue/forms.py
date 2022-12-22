@@ -51,3 +51,26 @@ class SearchEnglishForm(forms.Form):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():
             field.widget.attrs.update({'class': 'form-control'})
+
+
+class SearchPortugueseForm(forms.Form):
+    title_portuguese = forms.CharField(
+        label='Título em português',
+        required=False,
+        widget=forms.TextInput()
+    )
+    gender = forms.MultipleChoiceField(
+        label=gettext_lazy('Gênero literário'),
+        required=False,
+        choices=[
+            ('RO', gettext_lazy('Romance')),
+            ('CL', gettext_lazy('Coletânea')),
+            ('CR', gettext_lazy('Crônica')),
+        ],
+        widget=forms.SelectMultiple(attrs={'size': 3})
+    )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs.update({'class': 'form-control'})
