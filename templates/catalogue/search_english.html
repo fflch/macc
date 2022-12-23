@@ -80,7 +80,7 @@
           {% endif %}
 
           {% if work.authors.all %}
-            <dt class="col-sm-2">{% translate "Autores" %}</dt>
+            <dt class="col-sm-2">{% translate "Tradutor(a)" %}</dt>
             <dd class="col-sm-10">
               {% for author in work.authors.all %}
                 <p>{{ author.full_name }}</p>
