@@ -44,8 +44,15 @@
         <a class="nav-link" href="{% url 'account:login' %}">{% translate "Entrar" %}</a>
       </li>
       {% else %}
-      <li class="nav-item">
-        <a href="{% url 'account:logout'%}" class="nav-link">{% translate "Sair" %}</a>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="user-dropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa-solid fa-user"></i>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="user-dropdown">
+          <a class="dropdown-item" href="{% url 'account:profile'%}">{% translate "Perfil" %}</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="{% url 'account:logout'%}">{% translate "Sair" %}</a>
+        </div>
       </li>
       {% endif %}
       <li class="nav-item">

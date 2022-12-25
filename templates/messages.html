@@ -1,25 +1,29 @@
+{% load i18n %}
+
 {% if messages %}
   {% for message in messages %}
+    {% with message|safe|escape as safe_message %}
       {% if message.level_tag == 'success' %}
         <div class="alert alert-success alert-dismissible {{ message.extra_tags }}" role="alert">
           <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-          {{ message|safe|escape }}
+          {% translate safe_message %}
         </div>
       {% elif message.level_tag == 'error' %}
         <div class="alert alert-danger alert-dismissible {{ message.extra_tags }}" role="alert">
           <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-          {{ message|safe }}
+          {% translate safe_message %}
         </div>
       {% elif message.level_tag == 'info' %}
         <div class="alert alert-info alert-dismissible {{ message.extra_tags }}" role="alert">
           <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-          {{ message|safe|escape }}
+          {% translate safe_message %}
         </div>
       {% elif message.level_tag == 'warning' %}
         <div class="alert alert-warning alert-dismissible {{ message.extra_tags }}" role="alert">
           <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-          {{ message|safe|escape }}
+          {% translate safe_message %}
         </div>
       {% endif %}
+    {% endwith %}
   {% endfor %}
 {% endif %}

@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "d1b977e6644578547ba0c6aff3eb5badd5b08f6af3d2ff8109a6fc0d2e6174b1"
+            "sha256": "ae4175af2fd8608280c51f5dc50367e01bf85d1863d67aec11ce2df77d1ceaf8"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -84,6 +84,13 @@
                 "sha256:19da64c18d2d851112f09c287f8d3dbbdf725ab0e569077efb6cdcbd3497c107"
             ],
             "version": "==1.2.0"
+        },
+        "fontawesomefree": {
+            "hashes": [
+                "sha256:961d015f2f2355b389429d6f18006d304573ab88455ea39cc15975a7a59f048f"
+            ],
+            "index": "pypi",
+            "version": "==6.2.1"
         },
         "ipython": {
             "hashes": [
@@ -334,7 +341,7 @@
                 "sha256:1e61c37477a1626458e36f7b1d82aa5c9b094fa4802892072e49de9c60c4c926",
                 "sha256:8abb2f1d86890a2dfb989f9a77cfcfd3e47c2a354b01111771326f8aa26e0254"
             ],
-            "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'",
+            "index": "pypi",
             "version": "==1.16.0"
         },
         "sqlparse": {

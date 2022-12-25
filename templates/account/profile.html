@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+
+<h1>{% translate "Perfil" %}</h1>
+
+<p><a href="{% url 'account:change-password' %}">Alterar minha senha</a></p>
+
+{% endblock content %}

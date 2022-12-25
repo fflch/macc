@@ -11,6 +11,8 @@ pandas = "*"
 django-debug-toolbar = "*"
 ipython = "*"
 django-crispy-forms = "*"
+six = "*"
+fontawesomefree = "*"
 
 [dev-packages]
 autopep8 = "*"
