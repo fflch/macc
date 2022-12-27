@@ -83,6 +83,10 @@ def rollback_romances(apps, schema_editor):
 
 def rollback_short_stories(apps, schema_editor):
     OriginalFragment = apps.get_model('corpus', 'OriginalFragment')
+    TranslatedFragment = apps.get_model('corpus', 'TranslatedFragment')
+
+    TranslatedFragment.objects.filter(
+        original__work__code__startswith='CO').delete()
     OriginalFragment.objects.filter(work__code__startswith='CO').delete()
 
 

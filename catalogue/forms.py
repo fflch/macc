@@ -30,7 +30,8 @@ class SearchEnglishForm(forms.Form):
         required=False,
         choices=[
             ('RO', gettext_lazy('Romance')),
-            ('CL', gettext_lazy('Coletânea')),
+            ('NO', gettext_lazy('Novela')),
+            ('CO', gettext_lazy('Conto')),
             ('CR', gettext_lazy('Crônica')),
         ],
         widget=forms.SelectMultiple(attrs={'size': 3})

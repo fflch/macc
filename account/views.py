@@ -158,6 +158,39 @@ def reset_password(request):
     return render(request, 'account/reset_password.html', {"form": form})
 
 
+def reset_password_confirm(request, uidb64, token):
+    User = auth.get_user_model()
+    try:
+        uid = force_str(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+    except (ValueError, User.DoesNotExist):
+        user = None
+
+    if user and password_token.check_token(user, token):
+        if request.POST:
+            form = ChangePasswordForm(user, request.POST)
+            if form.is_valid():
+                form.save()
+                messages.success(
+                    request,
+                    'Your password has been set. You may go ahead '
+                    'and <b>log in</b> now.'
+                )
+                return redirect('pages:home')
+            else:
+                for error in list(form.errors.values()):
+                    messages.error(request, error)
+
+        form = ChangePasswordForm(user)
+        return render(request, 'account/change_password.html', {'form': form})
+    else:
+        messages.error(request, "Link is expired")
+
+    messages.error(
+        request, 'Something went wrong, redirecting back to Homepage')
+    return redirect('page:home')
+
+
 @login_required
 def profile(request):
     return render(request, 'account/profile.html', {})

@@ -21,7 +21,17 @@ class UserRegistrationForm(UserCreationForm):
 
 
 class UserAuthenticationForm(AuthenticationForm):
-    pass
+    def __init__(self, *args, **kwargs):
+        super(UserAuthenticationForm, self).__init__(*args, **kwargs)
+
+    username = forms.CharField(
+        label="Username or Email*",
+        widget=forms.TextInput({'placeholder': 'Usuário ou e-mail'})
+    )
+
+    password = forms.CharField(
+        widget=forms.PasswordInput({'placeholder': 'Senha'})
+    )
 
 
 class ChangePasswordForm(SetPasswordForm):

@@ -24,4 +24,9 @@ LOGGING = {
         'handlers': ['console'],
         'level': 'DEBUG',
     },
+    'loggers': {
+        'asyncio': {
+            'level': 'WARNING',
+        }
+    },
 }
