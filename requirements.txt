@@ -8,6 +8,7 @@ Django==4.1.4
 django-crispy-forms==1.14.0
 django_debug_toolbar==3.8.1
 executing==1.2.0
+fontawesomefree==6.2.1
 ipython==8.7.0
 jedi==0.18.2
 matplotlib-inline==0.1.6
