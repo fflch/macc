@@ -39,12 +39,11 @@ class SearchEnglishForm(forms.Form):
     country = forms.MultipleChoiceField(
         label=gettext_lazy('País'),
         required=False,
-        choices=list(map(
-            lambda country: (country[0], gettext_lazy(country[0])),
-            Place
-            .objects
-            .distinct('country')
-            .values_list('country'))),
+        choices=[
+            ('Brazil', gettext_lazy('Brasil')),
+            ('US', gettext_lazy('Estados Unidos')),
+            ('UK', gettext_lazy('Reino Unido')),
+        ],
         widget=forms.SelectMultiple(attrs={'size': 3})
     )
 
