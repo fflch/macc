@@ -110,7 +110,7 @@ class Publisher(TimeStampedModel):
 
     name = models.CharField(max_length=255, verbose_name=gettext_lazy('nome'))
     place = models.ForeignKey(
-        Place, null=True, blank=True, on_delete=models.RESTRICT)
+        Place, null=True, blank=True, on_delete=models.RESTRICT, verbose_name=gettext_lazy('local'))
 
     def __str__(self) -> str:
         return self.name
