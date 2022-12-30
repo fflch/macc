@@ -13,7 +13,3 @@ LOGGING = {
         'level': 'WARNING',
     },
 }
-
-STATICFILES_DIRS = [
-    BASE_DIR / 'static'
-]
