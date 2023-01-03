@@ -13,6 +13,7 @@ ipython = "*"
 django-crispy-forms = "*"
 six = "*"
 fontawesomefree = "*"
+gunicorn = "*"
 
 [dev-packages]
 autopep8 = "*"
