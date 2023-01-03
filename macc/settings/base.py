@@ -154,11 +154,11 @@ LOCALE_PATHS = [
 
 STATIC_URL = 'static/'
 
-if DEBUG:
-    STATICFILES_DIRS = [
-        BASE_DIR / 'static'
-    ]
-else:
+STATICFILES_DIRS = [
+    BASE_DIR / 'static'
+]
+
+if not DEBUG:
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Default primary key field type
