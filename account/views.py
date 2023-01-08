@@ -11,7 +11,11 @@ from django.core.mail import EmailMessage
 from django.utils.translation import gettext_lazy
 
 
-from .forms import UserRegistrationForm, UserAuthenticationForm, ChangePasswordForm, PasswordResetForm
+from .forms import (ProfileForm,
+                    UserRegistrationForm,
+                    UserAuthenticationForm,
+                    ChangePasswordForm,
+                    PasswordResetForm)
 from .tokens import password_token
 
 
@@ -19,19 +23,26 @@ def register(request):
     if request.user.is_authenticated:
         return redirect("/")
 
-    form = UserRegistrationForm(request.POST or None)
+    user_form = UserRegistrationForm(request.POST or None)
+    profile_form = ProfileForm(request.POST or None)
     if request.POST:
-        if form.is_valid():
-            user = form.save(commit=False)
+        if user_form.is_valid() and profile_form.is_valid():
+            user = user_form.save(commit=False)
             user.is_active = False
             user.save()
+            profile = profile_form.save(commit=False)
+            profile.user = user
+            profile.save()
             activate_email(request, user)
             return redirect('account:register-success')
         else:
-            for error in list(form.errors.values()):
+            for error in list(user_form.errors.values()):
+                messages.error(request, error)
+            for error in list(profile_form.errors.values()):
                 messages.error(request, error)
 
-    return render(request, 'account/registration.html', {'form': form})
+    return render(request, 'account/registration.html',
+                  {'user_form': user_form, 'profile_form': profile_form})
 
 
 def activate_email(request, user):
@@ -212,7 +223,7 @@ def login(request):
                 messages.success(
                     request,
                     gettext_lazy(
-                        f'Sua conexão como <strong>{user.email}</strong>'
+                        f'Sua conexão como <strong>{user.email}</strong> '
                         f'foi estabelecida. Clique <a href={reverse("account:logout")}>'
                         'aqui</a> para sair agora.'
                     ),
@@ -233,4 +244,4 @@ def logout(request):
     auth.logout(request)
     messages.info(request, gettext_lazy('Desconectado!'),
                   extra_tags='alert-autoclose')
-    return redirect('page:home')
+    return render(request, 'account/logout.html', {})
