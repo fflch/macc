@@ -6,21 +6,14 @@
 
 <h1>{% translate "Corpus - Busca" %}</h1>
 
-<form action="{% url 'corpus:search' %}" method="post">
+<form action="{% url 'corpus:search' %}">
   {% csrf_token %}
   <div class="form-row">
     <div class="col-md-5 mx-auto">
       <div class="form-row">
         <div class="col-md-10">
           <div class="form-group">
-            <input
-              class="form-control"
-              type="text"
-              name="q"
-              placeholder="{% translate 'Pesquisar...' %}"
-              {% if 'q' in request.POST %}
-                value="{{ request.POST.q }}"
-              {% endif %} >
+            {{ form.query }}
           </div>
         </div>
         <div class="col-md-2">
@@ -33,80 +26,12 @@
     <div class="col-md-5 mx-auto">
       <div class="form-row">
         <div class="form-group col-md-6">
-          <legend class="col-form-label">Buscar em...</legend>
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              name="search-language"
-              type="checkbox"
-              value="pt"
-              id="pt-br-check"
-              {% if pt %}
-                checked
-              {% endif %}
-              >
-            <label class="form-check-label" for="pt-br-check">{% translate "Português" %}</label>
-          </div>
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              name="search-language"
-              type="checkbox"
-              value="en"
-              id="en-us-check"
-              {% if en %}
-                checked
-              {% endif %}
-              >
-            <label class="form-check-label" for="en-us-check">{% translate "Inglês" %}</label>
-          </div>
+          {{ form.language.label_tag }}
+          {{ form.language }}
         </div>
         <div class="form-group col-md-6">
-          <legend class="col-form-label">Modo de busca</legend>
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="radio"
-              name="search-method"
-              id="search-method-1"
-              value="broad" checked>
-            <label class="form-check-label" for="search-method-1">
-              Busca ampla
-            </label>
-          </div>
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="radio"
-              name="search-method"
-              id="search-method-2"
-              value="exact">
-            <label class="form-check-label" for="search-method-2">
-              Busca exata
-            </label>
-          </div>
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="radio"
-              name="search-method"
-              id="search-method-3"
-              value="start">
-            <label class="form-check-label" for="search-method-3">
-              Início
-            </label>
-          </div>
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="radio"
-              name="search-method"
-              id="search-method-4"
-              value="end">
-            <label class="form-check-label" for="search-method-4">
-              Final
-            </label>
-          </div>
+          {{ form.search_type.label_tag }}
+          {{ form.search_type }}
         </div>
       </div>
     </div>
@@ -136,6 +61,5 @@
 {% if q %}<p>Nothing found for {{ q }}</p>{% endif %}
 {% endfor %}
 
-{% comment %} {{ result }} {% endcomment %}
 
 {% endblock content %}
