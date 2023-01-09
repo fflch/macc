@@ -1,27 +1,116 @@
 {% extends 'base.html' %}
-{% load crispy_forms_tags %}
+{% load i18n %}
+
+{% block title %}Cadastro{% endblock title %}
 
 {% block content %}
-<div class="content-section">
-  <form method="POST">
-    {% csrf_token %}
-    <fieldset class="form-group">
-      <legend class="border-bottom mb-4">Join Today</legend>
-      {{ form|crispy }}
 
-      {% include './includes/consent_modal.html' %}
-    </fieldset>
+<h1>Cadastro</h1>
+<div class="row">
+  <div class="col-md-6 mx-auto">
+    <form method="post">
+      {% csrf_token %}
+      <fieldset class="form-group">
+        <legend class="border-bottom mb-4">Dados pessoais</legend>
+        <div class="form-group">
+          {{ user_form.first_name.label_tag }}
+          {{ user_form.first_name }}
+        </div>
+        <div class="form-group">
+          {{ user_form.last_name.label_tag }}
+          {{ user_form.last_name }}
+        </div>
 
-    By registering, you accept the Terms of Service and Privacy Notice
+        <div class="form-group">
+          {{ user_form.email.label_tag }}
+          {{ user_form.email }}
+        </div>
 
-    <div class="form-group">
-      <button class="btn btn-outline-info" type="submit">Sign Up</button>
+        <div class="form-group">
+          {{ user_form.username.label_tag }}
+          {{ user_form.username }}
+          <div class="text-muted">
+            <small>{{ user_form.username.help_text }}</small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          {{ user_form.password1.label_tag }}
+          {{ user_form.password1 }}
+          <div class="text-muted">
+            <small>{{ user_form.password1.help_text }}</small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          {{ user_form.password2.label_tag }}
+          {{ user_form.password2 }}
+          <div class="text-muted">
+            <small>{{ user_form.password2.help_text }}</small>
+          </div>
+        </div>
+
+       <div class="form-group">
+        {{ profile_form.birth_date.label_tag }}
+        {{ profile_form.birth_date }}
+       </div>
+
+       <div class="form-group">
+        {{ profile_form.country.label_tag }}
+        {{ profile_form.country }}
+       </div>
+
+       <div class="form-group">
+        {{ profile_form.gender.label_tag }}
+        {{ profile_form.gender }}
+       </div>
+
+       <div class="form-group">
+        {{ profile_form.occupation.label_tag }}
+        {{ profile_form.occupation }}
+       </div>
+
+       <div class="form-group form-check">
+        {{ profile_form.education_institution }}
+        {{ profile_form.education_institution.label_tag }}
+       </div>
+
+        {% with 'user-consent' as modal_id %}
+        <div class="form-group form-check">
+        {{ user_form.consent }}
+        <label class="form-check-label" for="{{ user_form.consent.id_for_label }}">
+          Li e concordo com o
+          <a role="button" href="#" data-toggle="modal" data-target="#{{ modal_id }}">termo de compromisso</a>
+          do MACC
+        </label>
+        </div>
+        {% include './includes/consent_modal.html' with modal_id='user-consent' %}
+        {% endwith %}
+      </fieldset>
+
+      {% blocktranslate %}
+      <p>
+        Lembre-se que, ao confirmar seu cadastro, você aceita o termo de compromisso do MACC.
+      </p>
+      {% endblocktranslate %}
+
+      <div class="form-group">
+        <button class="btn btn-primary" type="submit">{% translate 'Cadastre-se' %}</button>
+      </div>
+    </form>
+    <div class="border-top pt-3">
+      <p>
+        <small class="text-muted">
+          Se já possui uma conta, clique <a href="{% url 'account:login' %}">{% translate "aqui" %}</a> para entrar.
+        </small>
+      </p>
+      <p>
+        <small class="text-muted">
+          <a href="{% url 'account:reset-password' %}">{% translate "Esqueci minha senha" %}</a>
+        </small>
+      </p>
     </div>
-  </form>
-  <div class="border-top pt-3">
-    <small class="text-muted">
-      Already Have An Account? <a class="ml-2" href="/login">Sign In</a>
-    </small>
   </div>
 </div>
+
 {% endblock content %}
