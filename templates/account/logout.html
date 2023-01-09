@@ -1,10 +1,13 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block content %}
-<h1 class="h2">You have been logged out</h1>
+<h1>{% translate "Desconectado" %}</h1>
 <div class="border-top pt-3">
   <small class="text-muted">
-    <a href="{% url 'account:login' %}">Log In Again</a>
+    {% translate 'Você foi desconectado. Clique' %}
+    <a href="{% url 'account:login' %}">{% translate "aqui" %}</a>
+    para conectar novamente.
   </small>
 </div>
 {% endblock content %}

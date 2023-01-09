@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'account',
     'crispy_forms',
     'fontawesomefree',
+    'django_countries',
 ]
 
 MIDDLEWARE = [

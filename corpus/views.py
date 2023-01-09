@@ -1,10 +1,12 @@
 from django.shortcuts import render
 from django.contrib.postgres.search import SearchQuery, SearchVector, SearchHeadline
+from django.contrib import messages
 from django.db.models import F, Q
 from django.contrib.auth.decorators import login_required
 
 
 from .models import OriginalFragment, Work
+from .forms import SearchCorpusForm
 
 
 from functools import reduce
@@ -37,12 +39,21 @@ def show(request, pk: int):
 
 @login_required
 def search(request):
-    search_languages = request.POST.get('search-language', [])
+    form = SearchCorpusForm(request.GET or None)
 
     context = {
-        'pt': 'pt' in search_languages,
-        'en': 'en' in search_languages,
+        'form': form
     }
+
+    if not form.is_valid():
+        for field, errors in form.errors.items():
+            for error in errors:
+                label = form.fields[field].label
+                messages.error(request, f"{label}: {error}")
+
+        return render(request, 'corpus/search.html', context)
+
+    search_languages = form.cleaned_data['language']
 
     search_columns = []
     if 'pt' in search_languages:
@@ -50,62 +61,61 @@ def search(request):
     if 'en' in search_languages:
         search_columns.append('translatedfragment__fragment')
 
-    if request.POST:
-        q = request.POST.get('q')
+    q = form.cleaned_data['query']
 
-        qs = (OriginalFragment
-              .objects
-              .prefetch_related('translatedfragment_set')
-              .all())
+    qs = (OriginalFragment
+          .objects
+          .prefetch_related('translatedfragment_set')
+          .all())
 
-        match request.POST.get('search-method'):
-            case 'broad':
-                search_vector = SearchVector(*search_columns)
-                search_query = SearchQuery(q)
-                qs = qs.annotate(search=search_vector).filter(
-                    search=search_query)
-            case 'exact':
-                filters = [{f'{col}__iregex': fr'\y{q}\y'}
-                           for col in search_columns]
-                queries = [Q(**args) for args in filters]
-                qs_filter = reduce(Q.__or__, queries)
-                qs = qs.filter(qs_filter)
-            case 'start':
-                filters = [{f'{col}__iregex': fr'\y{q}'}
-                           for col in search_columns]
-                queries = [Q(**args) for args in filters]
-                qs_filter = reduce(Q.__or__, queries)
-                qs = qs.filter(qs_filter)
-            case 'end':
-                filters = [{f'{col}__iregex': fr'{q}\y'}
-                           for col in search_columns]
-                queries = [Q(**args) for args in filters]
-                qs_filter = reduce(Q.__or__, queries)
-                qs = qs.filter(qs_filter)
-            case _: pass
+    match form.cleaned_data['search_type']:
+        case 'broad':
+            search_vector = SearchVector(*search_columns)
+            search_query = SearchQuery(q)
+            qs = qs.annotate(search=search_vector).filter(
+                search=search_query)
+        case 'exact':
+            filters = [{f'{col}__iregex': fr'\y{q}\y'}
+                       for col in search_columns]
+            queries = [Q(**args) for args in filters]
+            qs_filter = reduce(Q.__or__, queries)
+            qs = qs.filter(qs_filter)
+        case 'start':
+            filters = [{f'{col}__iregex': fr'\y{q}'}
+                       for col in search_columns]
+            queries = [Q(**args) for args in filters]
+            qs_filter = reduce(Q.__or__, queries)
+            qs = qs.filter(qs_filter)
+        case 'end':
+            filters = [{f'{col}__iregex': fr'{q}\y'}
+                       for col in search_columns]
+            queries = [Q(**args) for args in filters]
+            qs_filter = reduce(Q.__or__, queries)
+            qs = qs.filter(qs_filter)
+        case _: pass
 
-        qs = qs.annotate(
-            headline_original=SearchHeadline(
-                'fragment',
-                SearchQuery(q) if 'pt' in search_languages else '',
-                start_sel='<strong>',
-                stop_sel='</strong>',
-                min_words=1000,
-                max_words=10000)
-        )
-        qs = qs.annotate(
-            headline_translation=SearchHeadline(
-                'translatedfragment__fragment',
-                SearchQuery(q)
-                if 'en' in search_languages else '',
-                start_sel='<strong>',
-                stop_sel='</strong>',
-                min_words=1000,
-                max_words=10000
-            ),
-            translation_code=F('translatedfragment__work__code'),
-        )
+    qs = qs.annotate(
+        headline_original=SearchHeadline(
+            'fragment',
+            SearchQuery(q) if 'pt' in search_languages else '',
+            start_sel='<strong>',
+            stop_sel='</strong>',
+            min_words=1000,
+            max_words=10000)
+    )
+    qs = qs.annotate(
+        headline_translation=SearchHeadline(
+            'translatedfragment__fragment',
+            SearchQuery(q)
+            if 'en' in search_languages else '',
+            start_sel='<strong>',
+            stop_sel='</strong>',
+            min_words=1000,
+            max_words=10000
+        ),
+        translation_code=F('translatedfragment__work__code'),
+    )
 
-        context['result'] = qs
+    context['result'] = qs
 
     return render(request, 'corpus/search.html', context)

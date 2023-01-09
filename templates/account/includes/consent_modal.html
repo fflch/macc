@@ -1,27 +1,39 @@
 {% load i18n %}
 
-<a role="button" href="#" data-toggle="modal" data-target="#user-consent">
-  Launch demo modal
-</a>
-
-<div class="modal fade" id="user-consent" tabindex="-1" aria-labelledby="user-consent-label" aria-hidden="true">
+<div class="modal fade" id="{{ modal_id }}" tabindex="-1" aria-labelledby="user-consent-label" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
 
       <div class="modal-header">
-        <h5 class="modal-title" id="user-consent-label">Modal title</h5>
+        <h5 class="modal-title" id="user-consent-label">Termo de compromisso</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
 
       <div class="modal-body">
-        ...
+        <p>
+          O MACC é um projeto de fins acadêmicos e educativos.
+          O MACC não tem fins lucrativos ou comerciais e não constitui
+          ofensa aos direitos autorais de acordo com o art. 46 da Lei 9.610/98.
+        </p>
+        <p>
+          O corpus do MACC é uma obra derivada pois, nesse caso,
+          são centenas de obras originárias reunidas em uma criação
+          cujo objetivo não está na reprodução em si.
+          Os textos na íntegra jamais serão disponibilizados.
+        </p>
+        <p>
+          Para realizar a busca no Corpus, você afirma que:
+        </p>
+        <ul>
+          <li>sua pesquisa tem fins acadêmicos ou educativos;</li>
+          <li>não reproduzirá o material acessado.</li>
+        </ul>
       </div>
 
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
       </div>
 
     </div>
