@@ -13,3 +13,5 @@ LOGGING = {
         'level': 'WARNING',
     },
 }
+
+CSRF_TRUSTED_ORIGINS = ["https://macc.fflch.usp.br", "https://www.macc.fflch.usp.br"]
