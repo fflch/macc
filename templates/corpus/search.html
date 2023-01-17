@@ -4,7 +4,9 @@
 
 {% block content %}
 
-<h1>{% translate "Corpus - Busca" %}</h1>
+<h1>{% translate "Busca no Corpus" %}</h1>
+
+<p>{% translate Você precisa escolher um idioma na coluna esquerda e uma modalidade na coluna direita.%}</p>
 
 <form action="{% url 'corpus:search' %}">
   {% csrf_token %}
