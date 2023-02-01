@@ -3,7 +3,7 @@ from django.contrib.postgres.search import SearchQuery, SearchVector, SearchHead
 from django.contrib import messages
 from django.db.models import F, Q
 from django.contrib.auth.decorators import login_required
-
+from django.core.paginator import Paginator
 
 from .models import OriginalFragment, Work
 from .forms import SearchCorpusForm
@@ -41,17 +41,13 @@ def show(request, pk: int):
 def search(request):
     form = SearchCorpusForm(request.GET or None)
 
-    context = {
-        'form': form
-    }
-
     if not form.is_valid():
         for field, errors in form.errors.items():
             for error in errors:
                 label = form.fields[field].label
                 messages.error(request, f"{label}: {error}")
 
-        return render(request, 'corpus/search.html', context)
+        return render(request, 'corpus/search.html', {'form': form})
 
     search_languages = form.cleaned_data['language']
 
@@ -116,6 +112,11 @@ def search(request):
         translation_code=F('translatedfragment__work__code'),
     )
 
-    context['result'] = qs
+    paginator = None
+    page = None
+    if qs:
+        paginator = Paginator(qs, 10)
+    if paginator:
+        page = paginator.get_page(request.GET.get('page'))
 
-    return render(request, 'corpus/search.html', context)
+    return render(request, 'corpus/search.html', {'form': form, 'result': page})
