@@ -1,0 +1,33 @@
+{% load i18n %}
+
+<nav aria-label="page-navigation">
+  <ul class="pagination justify-content-center">
+    {% if page.has_previous %}
+      <li class="page-item"><a class="page-link" href="?page=1">&laquo; {% translate "Primeira página" %}</a></li>
+      <li class="page-item"><a class="page-link" href="?page={{ page.previous_page_number }}">{% translate "Página anterior" %}</a></li>
+    {% else %}
+      <li class="page-item disabled">
+        <span class="page-link disabled">&laquo; {% translate "Primeira página" %}</span>
+      </li>
+      <li class="page-item disabled">
+        <span class="page-link disabled">{% translate "Página anterior" %}</span>
+      </li>
+    {% endif %}
+
+    <li class="page-item active" aria-current="page">
+      <span class="page-link">{{ page.number }}</span>
+    </li>
+
+    {% if page.has_next %}
+      <li class="page-item"><a class="page-link" href="?page={{ page.next_page_number }}">{% translate "Próxima página" %}</a></li>
+      <li class="page-item"><a class="page-link" href="?page={{ page.paginator.num_pages }}">{% translate "Última página" %} &raquo;</a></li>
+    {% else %}
+      <li class="page-item disabled">
+        <span class="page-link disabled">{% translate "Próxima página" %}</span>
+      </li>
+      <li class="page-item disabled">
+        <span class="page-link disabled">{% translate "Última página" %} &raquo;</span>
+      </li>
+    {% endif %}
+  </ul>
+</nav>
