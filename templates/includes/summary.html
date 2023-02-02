@@ -1,0 +1,12 @@
+{% load i18n %}
+
+<p class="text-muted">
+{% blocktranslate with counter=page.paginator.count %}
+Foram encontrados {{ counter }} resultados.
+{% endblocktranslate %}
+</p>
+<p class="text-muted">
+{% blocktranslate with start_index=page.start_index end_index=page.end_index%}
+Mostrando registros {{ start_index }} a {{ end_index }}.
+{% endblocktranslate %}
+</p>

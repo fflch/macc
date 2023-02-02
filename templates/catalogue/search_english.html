@@ -7,8 +7,7 @@
 
 <div class="row">
   <div class="col-md-6 mx-auto">
-    <form action="{% url 'catalogue:search-english' %}" method="POST">
-      {% csrf_token %}
+    <form action="{% url 'catalogue:search-english' %}">
       <div class="form-group row">
         <label class="col-sm-4 col-form-label">
           {{ form.year_from.label }}
@@ -65,6 +64,12 @@
 
 <div class="row">
   <div class="col">
+    {% include 'includes/summary.html' with page=result %}
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
     {% for work in result %}
     <div class="card my-3">
       <div class="card-header h4">
@@ -109,5 +114,13 @@
     {% endfor %}
   </div>
 </div>
+
+{% if result %}
+<div class="row">
+  <div class="col">
+    {% include 'includes/paginator.html' with page=result %}
+  </div>
+</div>
+{% endif %}
 
 {% endblock content %}

@@ -6,7 +6,7 @@
 
 <h1>{% translate "Busca no Corpus" %}</h1>
 
-<p>{% translate Você precisa escolher um idioma na coluna esquerda e uma modalidade na coluna direita.%}</p>
+<p>{% translate "Você precisa escolher um idioma na coluna esquerda e uma modalidade na coluna direita." %}</p>
 
 <form action="{% url 'corpus:search' %}">
   {% csrf_token %}
@@ -40,6 +40,13 @@
   </div>
 </form>
 
+{% if result %}
+<div class="row">
+  <div class="col">
+    {% include 'includes/summary.html' with page=result %}
+  </div>
+</div>
+{% endif %}
 
 {% for fragment in result %}
 {% ifchanged fragment.pk %}
@@ -63,5 +70,12 @@
 {% if q %}<p>Nothing found for {{ q }}</p>{% endif %}
 {% endfor %}
 
+{% if result %}
+<div class="row">
+  <div class="col">
+    {% include 'includes/paginator.html' with page=result %}
+  </div>
+</div>
+{% endif %}
 
 {% endblock content %}
