@@ -9,7 +9,6 @@
 <p>{% translate "Você precisa escolher um idioma na coluna esquerda e uma modalidade na coluna direita." %}</p>
 
 <form action="{% url 'corpus:search' %}">
-  {% csrf_token %}
   <div class="form-row">
     <div class="col-md-5 mx-auto">
       <div class="form-row">
@@ -48,6 +47,13 @@
 </div>
 {% endif %}
 
+<blockquote>
+  <p>{{ first_page_qs }}</p>
+  <p>{{ previous_page_qs }}</p>
+  <p>{{ next_page_qs }}</p>
+  <p>{{ last_page_qs }}</p>
+</blockquote>
+
 {% for fragment in result %}
 {% ifchanged fragment.pk %}
 <hr/>
@@ -73,7 +79,7 @@
 {% if result %}
 <div class="row">
   <div class="col">
-    {% include 'includes/paginator.html' with page=result %}
+    {% include 'includes/paginator.html' with page=result qs=qs %}
   </div>
 </div>
 {% endif %}
