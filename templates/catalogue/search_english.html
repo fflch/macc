@@ -118,7 +118,7 @@
 {% if result %}
 <div class="row">
   <div class="col">
-    {% include 'includes/paginator.html' with page=result %}
+    {% include 'includes/paginator.html' with page=result qs=qs %}
   </div>
 </div>
 {% endif %}

@@ -1,3 +1,4 @@
+from django.http import QueryDict
 from django.shortcuts import render
 from corpus.models import Translation, Collection, Work
 from django.db.models import F, Value
@@ -83,7 +84,7 @@ def search_english(request):
     )
 
     form = SearchEnglishForm(request.GET)
-    qs = None
+    queryset = None
 
     if form.is_valid():
         if form.cleaned_data['year_from']:
@@ -116,56 +117,128 @@ def search_english(request):
                 country__in=form.cleaned_data['country'])
             collections_qs = collections_qs.filter(
                 country__in=form.cleaned_data['country'])
-        qs = romances_qs.union(collections_qs).order_by('year')
+        queryset = romances_qs.union(collections_qs).order_by('year')
     else:
         for field, errors in form.errors.items():
             for error in errors:
                 label = form.fields[field].label
                 messages.error(request, f"{label}: {error}")
 
+    context = {'form': form}
     paginator = None
     page = None
-    if qs:
-        paginator = Paginator(qs, 10)
+    if queryset:
+        paginator = Paginator(queryset, 10)
     if paginator:
         page = paginator.get_page(request.GET.get('page'))
+        context['result'] = page
+        context['qs'] = {}
 
-    return render(request, f'catalogue/search_english.html',
-                  {'form': form, 'result': page})
+        if page.has_previous():
+            first_page_qs = QueryDict(request.GET.urlencode(), mutable=True)
+            try:
+                first_page_qs.pop('page')
+            except KeyError:
+                pass
+            first_page_qs.update({'page': 1})
+            context['qs']['first_page'] = first_page_qs.urlencode()
+
+            previous_page_qs = QueryDict(request.GET.urlencode(), mutable=True)
+            try:
+                previous_page_qs.pop('page')
+            except KeyError:
+                pass
+            previous_page_qs.update({'page': page.previous_page_number()})
+            context['qs']['previous_page'] = previous_page_qs.urlencode()
+
+        if page.has_next():
+            next_page_qs = QueryDict(request.GET.urlencode(), mutable=True)
+            try:
+                next_page_qs.pop('page')
+            except KeyError:
+                pass
+            next_page_qs.update({'page': page.next_page_number()})
+            context['qs']['next_page'] = next_page_qs.urlencode()
+
+            last_page_qs = QueryDict(request.GET.urlencode(), mutable=True)
+            try:
+                last_page_qs.pop('page')
+            except KeyError:
+                pass
+            last_page_qs.update({'page': paginator.num_pages})
+            context['qs']['last_page'] = last_page_qs.urlencode()
+
+    return render(request, f'catalogue/search_english.html', context)
 
 
 def search_portuguese(request):
-    qs = (Work
-          .objects
-          .prefetch_related('translation_set')
-          .filter(translation__id__isnull=False)
-          .distinct()
-          .order_by('year'))
+    queryset = (Work
+                .objects
+                .prefetch_related('translation_set')
+                .filter(translation__id__isnull=False)
+                .distinct()
+                .order_by('year'))
 
     form = SearchEnglishForm(request.GET)
 
     if form.is_valid():
         if form.cleaned_data['title_portuguese']:
-            qs = qs.filter(
+            queryset = queryset.filter(
                 title__icontains=form.cleaned_data['title_portuguese'])
         if form.cleaned_data['gender']:
             for gender in form.cleaned_data['gender']:
-                qs = qs.filter(code__icontains=gender)
+                queryset = queryset.filter(code__icontains=gender)
     else:
         for field, errors in form.errors.items():
             for error in errors:
                 label = form.fields[field].label
                 messages.error(request, f"{label}: {error}")
 
+    context = {'form': form}
     paginator = None
     page = None
-    if qs:
-        paginator = Paginator(qs, 10)
+    if queryset:
+        paginator = Paginator(queryset, 10)
     if paginator:
         page = paginator.get_page(request.GET.get('page'))
+        context['result'] = page
+        context['qs'] = {}
 
-    return render(request, f'catalogue/search_portuguese.html',
-                  {'form': form, 'result': page})
+        if page.has_previous():
+            first_page_qs = QueryDict(request.GET.urlencode(), mutable=True)
+            try:
+                first_page_qs.pop('page')
+            except KeyError:
+                pass
+            first_page_qs.update({'page': 1})
+            context['qs']['first_page'] = first_page_qs.urlencode()
+
+            previous_page_qs = QueryDict(request.GET.urlencode(), mutable=True)
+            try:
+                previous_page_qs.pop('page')
+            except KeyError:
+                pass
+            previous_page_qs.update({'page': page.previous_page_number()})
+            context['qs']['previous_page'] = previous_page_qs.urlencode()
+
+        if page.has_next():
+            next_page_qs = QueryDict(request.GET.urlencode(), mutable=True)
+            try:
+                next_page_qs.pop('page')
+            except KeyError:
+                pass
+            next_page_qs.update({'page': page.next_page_number()})
+            context['qs']['next_page'] = next_page_qs.urlencode()
+
+            last_page_qs = QueryDict(request.GET.urlencode(), mutable=True)
+            try:
+                last_page_qs.pop('page')
+            except KeyError:
+                pass
+            last_page_qs.update({'page': paginator.num_pages})
+            context['qs']['last_page'] = last_page_qs.urlencode()
+
+    return render(request, f'catalogue/search_portuguese.html', context)
 
 
 def show(request, code):
