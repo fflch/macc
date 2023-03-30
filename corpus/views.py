@@ -1,3 +1,4 @@
+from django.http import QueryDict
 from django.shortcuts import render
 from django.contrib.postgres.search import SearchQuery, SearchVector, SearchHeadline
 from django.contrib import messages
@@ -59,38 +60,38 @@ def search(request):
 
     q = form.cleaned_data['query']
 
-    qs = (OriginalFragment
-          .objects
-          .prefetch_related('translatedfragment_set')
-          .all())
+    queryset = (OriginalFragment
+                .objects
+                .prefetch_related('translatedfragment_set')
+                .all())
 
     match form.cleaned_data['search_type']:
         case 'broad':
             search_vector = SearchVector(*search_columns)
             search_query = SearchQuery(q)
-            qs = qs.annotate(search=search_vector).filter(
+            queryset = queryset.annotate(search=search_vector).filter(
                 search=search_query)
         case 'exact':
             filters = [{f'{col}__iregex': fr'\y{q}\y'}
                        for col in search_columns]
             queries = [Q(**args) for args in filters]
             qs_filter = reduce(Q.__or__, queries)
-            qs = qs.filter(qs_filter)
+            queryset = queryset.filter(qs_filter)
         case 'start':
             filters = [{f'{col}__iregex': fr'\y{q}'}
                        for col in search_columns]
             queries = [Q(**args) for args in filters]
             qs_filter = reduce(Q.__or__, queries)
-            qs = qs.filter(qs_filter)
+            queryset = queryset.filter(qs_filter)
         case 'end':
             filters = [{f'{col}__iregex': fr'{q}\y'}
                        for col in search_columns]
             queries = [Q(**args) for args in filters]
             qs_filter = reduce(Q.__or__, queries)
-            qs = qs.filter(qs_filter)
+            queryset = queryset.filter(qs_filter)
         case _: pass
 
-    qs = qs.annotate(
+    queryset = queryset.annotate(
         headline_original=SearchHeadline(
             'fragment',
             SearchQuery(q) if 'pt' in search_languages else '',
@@ -99,7 +100,7 @@ def search(request):
             min_words=1000,
             max_words=10000)
     )
-    qs = qs.annotate(
+    queryset = queryset.annotate(
         headline_translation=SearchHeadline(
             'translatedfragment__fragment',
             SearchQuery(q)
@@ -112,11 +113,48 @@ def search(request):
         translation_code=F('translatedfragment__work__code'),
     )
 
+    context = {'form': form}
     paginator = None
     page = None
-    if qs:
-        paginator = Paginator(qs, 10)
+    if queryset:
+        paginator = Paginator(queryset, 10)
     if paginator:
         page = paginator.get_page(request.GET.get('page'))
+        context['result'] = page
+        context['qs'] = {}
 
-    return render(request, 'corpus/search.html', {'form': form, 'result': page})
+        if page.has_previous():
+            first_page_qs = QueryDict(request.GET.urlencode(), mutable=True)
+            try:
+                first_page_qs.pop('page')
+            except KeyError:
+                pass
+            first_page_qs.update({'page': 1})
+            context['qs']['first_page'] = first_page_qs.urlencode()
+
+            previous_page_qs = QueryDict(request.GET.urlencode(), mutable=True)
+            try:
+                previous_page_qs.pop('page')
+            except KeyError:
+                pass
+            previous_page_qs.update({'page': page.previous_page_number()})
+            context['qs']['previous_page'] = previous_page_qs.urlencode()
+
+        if page.has_next():
+            next_page_qs = QueryDict(request.GET.urlencode(), mutable=True)
+            try:
+                next_page_qs.pop('page')
+            except KeyError:
+                pass
+            next_page_qs.update({'page': page.next_page_number()})
+            context['qs']['next_page'] = next_page_qs.urlencode()
+
+            last_page_qs = QueryDict(request.GET.urlencode(), mutable=True)
+            try:
+                last_page_qs.pop('page')
+            except KeyError:
+                pass
+            last_page_qs.update({'page': paginator.num_pages})
+            context['qs']['last_page'] = last_page_qs.urlencode()
+
+    return render(request, 'corpus/search.html', context)
