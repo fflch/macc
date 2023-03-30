@@ -47,13 +47,6 @@
 </div>
 {% endif %}
 
-<blockquote>
-  <p>{{ first_page_qs }}</p>
-  <p>{{ previous_page_qs }}</p>
-  <p>{{ next_page_qs }}</p>
-  <p>{{ last_page_qs }}</p>
-</blockquote>
-
 {% for fragment in result %}
 {% ifchanged fragment.pk %}
 <hr/>
