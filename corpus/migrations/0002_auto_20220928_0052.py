@@ -24,6 +24,8 @@ def load_catalog(apps, schema_editor):
               .drop_duplicates()
               .apply(lambda s: s.split(maxsplit=1)))
 
+    df['translator'] = df['translator'].fillna('')
+
     authors = [Author(first_name=first, last_name=last)
                for first, last in people
                if " ".join([first, last]) in ['Machado de Assis']]
@@ -76,13 +78,13 @@ def load_catalog(apps, schema_editor):
                    .loc[df['work_id']
                         .str
                         .contains('RO\d{3}TR\d{2}').fillna(False), :]
-                   .dropna(subset=['translator'])
                    .iterrows()):
         work_translators = [
             Translator.objects.filter(first_name=first_name,
                                       last_name=last_name).get()
             for first_name, last_name in [s.strip().split(maxsplit=1)
-                                          for s in row.translator.split(';')]
+                                          for s in row.translator.split(';')
+                                          if row.translator != '']
         ]
         try:
             publisher = Publisher.objects.filter(
@@ -101,6 +103,8 @@ def load_catalog(apps, schema_editor):
     df2 = pd.read_csv(
         'corpus/migrations/data/collections.csv', na_values=['null'])
 
+    df2['translator'] = df2['translator'].fillna('')
+
     for _, row in df2.iterrows():
         try:
             publisher = Publisher.objects.filter(
@@ -114,7 +118,8 @@ def load_catalog(apps, schema_editor):
             Translator.objects.filter(first_name=first_name,
                                       last_name=last_name).get()
             for first_name, last_name in [s.strip().split(maxsplit=1)
-                                          for s in row.translator.split(';')]
+                                          for s in row.translator.split(';')
+                                          if row.translator != '']
         ]
         collection = Collection(year=row.year,
                                 title=row['name'],
