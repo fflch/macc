@@ -6,17 +6,18 @@ from .models import Author, Collection, Translator, Work, Place, Publisher, Tran
 class TranslationAdmin(admin.ModelAdmin):
     list_display = ('work_code', 'work_title', 'code', 'title',)
     list_display_links = ('code',)
+    # sortable_by = ('work_code', 'work_title', 'code', 'title',)
 
     list_select_related = ('work',)
     search_fields = ('work__title', 'title',)
 
     ordering = ('code',)
 
-    @admin.display
+    @admin.display(ordering='work__code')
     def work_code(self, obj):
         return obj.work.code
 
-    @admin.display
+    @admin.display(ordering='work__title')
     def work_title(self, obj):
         return obj.work.title
 
